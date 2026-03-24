@@ -15,6 +15,9 @@ html{height:100%;overflow:hidden}body{height:100%;background:var(--bg);color:var
 #app{max-width:500px;margin:0 auto;height:100%;display:flex;flex-direction:column;position:relative;overflow:hidden}
 .hdr{display:flex;align-items:center;justify-content:space-between;padding:max(env(safe-area-inset-top),10px) 16px 10px;background:var(--sf);border-bottom:1px solid var(--bd);flex-shrink:0}
 .hdr h1{font-size:18px;font-weight:700;letter-spacing:-.3px}.hdr h1 b{color:var(--red)}
+.hdr-r{display:flex;align-items:center;gap:8px}
+.lang-btn{font-size:10px;padding:3px 8px;border-radius:12px;border:1.5px solid var(--bd);background:var(--sf);cursor:pointer;font-weight:700;font-family:var(--f);color:var(--dm)}
+.lang-btn.on{border-color:var(--blu);color:var(--blu);background:#eff6ff}
 .badge{font-size:10px;color:var(--dm);background:var(--sf2);padding:3px 10px;border-radius:14px;font-weight:600}
 .ctrl{flex-shrink:0;background:var(--sf);border-bottom:1px solid var(--bd)}
 .blocks{display:flex;gap:5px;padding:8px 16px;overflow-x:auto;-webkit-overflow-scrolling:touch}.blocks::-webkit-scrollbar{display:none}
@@ -26,26 +29,28 @@ html{height:100%;overflow:hidden}body{height:100%;background:var(--bg);color:var
 .wbar{display:flex;align-items:center;justify-content:space-between;padding:6px 16px;background:var(--sf2)}
 .wb{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--bd);background:var(--sf);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--tx)}
 .wl{font-family:var(--m);font-size:11px;font-weight:600;text-align:center}
-.dots{display:flex;gap:3px;justify-content:center;margin-top:2px}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--bd)}.dot.on{background:var(--tx)}
-.dtabs{display:flex;border-bottom:1px solid var(--bd);background:var(--sf);overflow-x:auto;flex-shrink:0;-webkit-overflow-scrolling:touch}.dtabs::-webkit-scrollbar{display:none}
-.dt{flex:none;padding:10px 16px;border:none;background:transparent;font-family:var(--f);font-size:12px;font-weight:500;color:var(--dm);cursor:pointer;border-bottom:2.5px solid transparent;white-space:nowrap}
+.dots{display:flex;gap:3px;justify-content:center;margin-top:2px}.dot{width:6px;height:6px;border-radius:50%;background:var(--bd)}.dot.on{background:var(--tx)}
+.dtabs{display:flex;border-bottom:1px solid var(--bd);background:var(--sf);overflow-x:auto;flex-shrink:0}.dtabs::-webkit-scrollbar{display:none}
+.dt{flex:none;padding:10px 14px;border:none;background:transparent;font-family:var(--f);font-size:12px;font-weight:500;color:var(--dm);cursor:pointer;border-bottom:2.5px solid transparent;white-space:nowrap;position:relative}
 .dt.on{color:var(--tx);border-bottom-color:var(--red);font-weight:700}
+.dt .dcheck{position:absolute;top:4px;right:4px;width:14px;height:14px;border-radius:50%;background:var(--grn);display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:700}
 .scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:20px}
 .sec{padding:0 16px}
 .sh{display:flex;align-items:center;justify-content:space-between;padding:16px 0 6px}
 .stitle{font-size:16px;font-weight:700}
 .slabel{font-size:9px;padding:2px 6px;border-radius:4px;font-weight:700;margin-left:6px}
-.exr{display:flex;align-items:center;padding:12px 0;border-bottom:1px solid var(--bd)}
-.exr:last-child{border-bottom:none}
+.exr{display:flex;align-items:center;padding:12px 0;border-bottom:1px solid var(--bd)}.exr:last-child{border-bottom:none}
 .eck{width:22px;height:22px;border-radius:50%;border:2px solid var(--bd);margin-right:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer}
 .eck.dn{background:var(--grn);border-color:var(--grn)}.eck.dn::after{content:'✓';color:#fff;font-size:11px;font-weight:700}
-.exi{flex:1;min-width:0;cursor:pointer}
-.exn{font-size:14px;font-weight:600;line-height:1.3}
+.exi{flex:1;min-width:0;cursor:pointer}.exn{font-size:14px;font-weight:600;line-height:1.3}
 .exc{font-size:9px;padding:1px 5px;border-radius:3px;font-weight:600;margin-left:4px}
 .exm{font-size:12px;color:var(--dm);font-family:var(--m);margin-top:1px}
 .tgt{color:var(--red);font-weight:700;font-size:11px}
 .arrow{color:#c7c7cc;font-size:18px;margin-left:6px;cursor:pointer}
+.addb{width:100%;padding:10px;border-radius:10px;border:1.5px dashed var(--bd);background:transparent;font-family:var(--f);font-size:12px;font-weight:600;color:var(--dm);cursor:pointer;margin:8px 0 2px}
+.addb:active{border-color:var(--tx);color:var(--tx)}
+.complete-btn{margin:12px 16px;padding:14px;border:none;border-radius:var(--r);font-family:var(--f);font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.complete-btn.done{background:var(--grn);color:#fff}.complete-btn.notdone{background:var(--tx);color:#fff}
 .bnav{display:flex;background:var(--sf);border-top:1px solid var(--bd);flex-shrink:0;padding-bottom:env(safe-area-inset-bottom,6px)}
 .nb{flex:1;padding:7px 4px 4px;border:none;background:transparent;font-family:var(--f);font-size:9px;color:var(--dm);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:1px}
 .nb.on{color:var(--red);font-weight:700}.ni{font-size:20px}
@@ -54,19 +59,29 @@ html{height:100%;overflow:hidden}body{height:100%;background:var(--bg);color:var
 .mbar{width:36px;height:4px;background:var(--bd);border-radius:2px;margin:6px auto 14px}
 .mod h3{font-size:17px;font-weight:700;margin-bottom:2px}
 .msub{font-size:11px;color:var(--dm);margin-bottom:14px}
-.drow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px}
+.dcomp{background:var(--sf2);border-radius:var(--r);padding:12px;margin:14px 0 6px}
+.dcr{display:flex;justify-content:space-between;padding:3px 0}.dcl{font-size:12px;color:var(--dm)}.dcv{font-family:var(--m);font-size:13px;font-weight:600}
 .dlbl{font-size:10px;font-weight:700;color:var(--dm);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
 .dinp{width:100%;padding:10px;border:1.5px solid var(--bd);border-radius:8px;font-family:var(--m);font-size:15px;background:var(--sf);color:var(--tx);-webkit-appearance:none}
 .dinp:focus{border-color:var(--tx);outline:none}
-.dcomp{background:var(--sf2);border-radius:var(--r);padding:12px;margin:14px 0 6px}
-.dcr{display:flex;justify-content:space-between;padding:3px 0}.dcl{font-size:12px;color:var(--dm)}.dcv{font-family:var(--m);font-size:13px;font-weight:600}
+.drow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px}
 .btn{width:100%;padding:12px;border:none;border-radius:var(--r);font-family:var(--f);font-size:14px;font-weight:700;cursor:pointer;margin-top:7px}
 .btn-p{background:var(--tx);color:#fff}.btn-d{background:transparent;color:var(--red);border:1.5px solid var(--red)}.btn-s{background:var(--sf2);color:var(--tx);border:1.5px solid var(--bd)}
+.mi{display:flex;align-items:center;padding:12px 8px;cursor:pointer;border-radius:10px}.mi:active{background:var(--sf2)}
+.min{flex:1;font-size:13px;font-weight:500}.mir{font-family:var(--m);font-size:10px;color:var(--dm);background:var(--sf2);padding:2px 7px;border-radius:5px}
+.mgl{font-size:10px;font-weight:700;color:var(--dm);text-transform:uppercase;letter-spacing:.8px;padding:8px 0 2px}
 .vcard{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:12px;margin-bottom:6px}
-.vbar{height:4px;background:var(--sf2);border-radius:2px;overflow:hidden;margin-top:6px}
-.vfill{height:100%;border-radius:2px}
+.vbar{height:4px;background:var(--sf2);border-radius:2px;overflow:hidden;margin-top:6px}.vfill{height:100%;border-radius:2px}
 .toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:var(--tx);color:#fff;padding:8px 20px;border-radius:18px;font-size:12px;font-weight:600;z-index:200;white-space:nowrap}
-.progbar{display:flex;gap:2px;margin-top:4px}.progbar div{flex:1;height:3px;border-radius:1.5px;background:var(--bd)}.progbar div.done{background:var(--grn)}
+.log-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:16px}
+.log-card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:14px;position:relative;cursor:pointer}
+.log-card.completed{border-color:var(--grn)}.log-card .lc-badge{position:absolute;top:8px;right:8px;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff}
+.log-card .lc-badge.done{background:var(--grn)}.log-card .lc-badge.pending{background:var(--bd);color:var(--dm)}
+.log-card .lc-num{font-family:var(--m);font-size:16px;font-weight:700;margin-bottom:2px}
+.log-card .lc-day{font-size:11px;color:var(--dm);font-weight:600;margin-bottom:6px}
+.log-card .lc-muscles{display:flex;flex-wrap:wrap;gap:3px}
+.log-card .lc-m{font-size:9px;padding:2px 6px;border-radius:4px;font-weight:600}
+.log-card.today{border:2px solid var(--red)}.log-card.today .lc-today{position:absolute;top:-8px;left:10px;background:var(--red);color:#fff;font-size:9px;padding:1px 8px;border-radius:8px;font-weight:700}
 </style>
 </head>
 <body>
@@ -76,416 +91,230 @@ html{height:100%;overflow:hidden}body{height:100%;background:var(--bg);color:var
 <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.24.7/babel.min.js"></script>
 <script type="text/babel">
 const{useState,useEffect,useMemo,useCallback}=React;
-const CATS={F:"Fondamentale",C:"Complementare",I:"Isolamento"};
+const T={it:{blocks:["Forza Ipertrofica","Trasformazione Ipertrofica","Qualità Muscolare"],phases:["Test Carichi","Fase 1","Fase 2","Scarico","Fase 3"],week:"Sett.",of:"/",tabs:{workout:"Scheda",volume:"Volume",log:"Log",library:"Esercizi",rm:"1RM"},primary:"Primario",secondary:"Secondario",target:"Target",sets:"Serie",reps:"Reps",rest:"Rec",load:"Carico",pct:"% 1RM",vol:"Volume",complete:"Completa allenamento",completed:"Completato ✓",undoComplete:"Annulla",weeklyVol:"Volume Settimanale",library:"Libreria Esercizi",calc1rm:"Calcola 1RM",formula:"Formula di Brzycki",calcBtn:"Calcola",saveOn:"Salva su",save:"Salva",close:"Chiudi",bodyweight:"Corpo libero",today:"Oggi",workout:"Workout",swap:"Sostituisci",remove:"Rimuovi",addEx:"+ Aggiungi esercizio",swapWith:"Sostituisci con...",addExTitle:"Aggiungi esercizio",cantRemove:"Target: non rimuovibile, solo sostituibile",muscles:{Petto:"Petto",Dorso:"Dorso",Gambe:"Gambe",Spalle:"Spalle",Bicipiti:"Bicipiti",Tricipiti:"Tricipiti",Addominali:"Addominali"},cats:{F:"Fondamentale",C:"Complementare",I:"Isolamento"},dayNames:["Giorno A","Giorno B","Giorno C","Giorno D"],progNote:"Progressioni calcolate automaticamente.",totalReps:"reps tot",setsPerW:"serie/sett"},
+en:{blocks:["Hypertrophic Strength","Hypertrophic Transformation","Muscle Quality"],phases:["Load Test","Phase 1","Phase 2","Deload","Phase 3"],week:"Week",of:"/",tabs:{workout:"Workout",volume:"Volume",log:"Log",library:"Exercises",rm:"1RM"},primary:"Primary",secondary:"Secondary",target:"Target",sets:"Sets",reps:"Reps",rest:"Rest",load:"Load",pct:"% 1RM",vol:"Volume",complete:"Complete workout",completed:"Completed ✓",undoComplete:"Undo",weeklyVol:"Weekly Volume",library:"Exercise Library",calc1rm:"Calculate 1RM",formula:"Brzycki formula",calcBtn:"Calculate",saveOn:"Save to",save:"Save",close:"Close",bodyweight:"Bodyweight",today:"Today",workout:"Workout",swap:"Swap",remove:"Remove",addEx:"+ Add exercise",swapWith:"Swap with...",addExTitle:"Add exercise",cantRemove:"Target: can't remove, only swap",muscles:{Petto:"Chest",Dorso:"Back",Gambe:"Legs",Spalle:"Shoulders",Bicipiti:"Biceps",Tricipiti:"Triceps",Addominali:"Abs"},cats:{F:"Compound",C:"Accessory",I:"Isolation"},dayNames:["Day A","Day B","Day C","Day D"],progNote:"Progressions calculated automatically.",totalReps:"total reps",setsPerW:"sets/wk"}};
+
 const MU=["Petto","Dorso","Gambe","Spalle","Bicipiti","Tricipiti","Addominali"];
 const MC=m=>({Petto:"#ef4444",Dorso:"#3b82f6",Gambe:"#22c55e",Spalle:"#f59e0b",Bicipiti:"#a855f7",Tricipiti:"#ec4899",Addominali:"#06b6d4"})[m]||"#888";
 const CC=c=>c==="F"?{b:"#fef2f2",c:"#dc2626"}:c==="C"?{b:"#eff6ff",c:"#2563eb"}:{b:"#f0fdf4",c:"#16a34a"};
- 
-// Exercise database with user's 1RMs
+
 const EX={
-  e1:{n:"Panca piana",m:"Petto",c:"F",rm:74},e2:{n:"Chest Press",m:"Petto",c:"C",rm:65},
-  e3:{n:"Chest Press Incline",m:"Petto",c:"C",rm:53},e4:{n:"Spinte manubri panca piana",m:"Petto",c:"C",rm:25},
-  e5:{n:"Spinte manubri panca 45°",m:"Petto",c:"C",rm:24},e6:{n:"Croci su panca piana",m:"Petto",c:"I",rm:12},
-  e7:{n:"Croci ai cavi bassi",m:"Petto",c:"I",rm:6},
-  e8:{n:"Stacco da terra",m:"Dorso",c:"F",rm:100},e9:{n:"Lat machine presa larga",m:"Dorso",c:"C",rm:60},
-  e10:{n:"Lat machine presa media",m:"Dorso",c:"C",rm:69},e11:{n:"Lat machine triangolo",m:"Dorso",c:"C",rm:69},
-  e12:{n:"Pulley machine triangolo",m:"Dorso",c:"C",rm:60},e13:{n:"Rematore manubrio",m:"Dorso",c:"C",rm:32},
-  e14:{n:"Rematore T-bar triangolo",m:"Dorso",c:"C",rm:56},
-  e15:{n:"Squat",m:"Gambe",c:"F",rm:103},e16:{n:"Leg press",m:"Gambe",c:"F",rm:151},
-  e17:{n:"Stacco rumeno",m:"Gambe",c:"F",rm:99},e18:{n:"Leg curl machine",m:"Gambe",c:"C",rm:60},
-  e19:{n:"Leg extension",m:"Gambe",c:"C",rm:60},e20:{n:"Affondi multipower",m:"Gambe",c:"C",rm:27},
-  e21:{n:"Affondi manubri camminata",m:"Gambe",c:"C",rm:25},
-  e22:{n:"Military Press",m:"Spalle",c:"F",rm:50},e23:{n:"Military press multipower",m:"Spalle",c:"C",rm:53},
-  e24:{n:"Spinte in alto manubri",m:"Spalle",c:"C",rm:24},e25:{n:"Alzate laterali in piedi",m:"Spalle",c:"I",rm:12},
-  e26:{n:"Alzate laterali panca 30°",m:"Spalle",c:"I",rm:9},e27:{n:"Alzate laterali cavo basso",m:"Spalle",c:"I",rm:6},
-  e28:{n:"Alzate posteriori panca",m:"Spalle",c:"I",rm:9},
-  e29:{n:"Curl bilanciere EZ",m:"Bicipiti",c:"C",rm:25},e30:{n:"Curl manubri",m:"Bicipiti",c:"C",rm:13},
-  e31:{n:"Curl panca 60°",m:"Bicipiti",c:"I",rm:11},e32:{n:"Curl cavo basso barra",m:"Bicipiti",c:"I",rm:20},
-  e33:{n:"Hammer curl 60°",m:"Bicipiti",c:"I",rm:12},
-  e34:{n:"French press bilanciere EZ",m:"Tricipiti",c:"C",rm:25},e35:{n:"French press ez panca",m:"Tricipiti",c:"C",rm:20},
-  e36:{n:"French press corda cavo alto",m:"Tricipiti",c:"I",rm:32},e37:{n:"French press cavo basso",m:"Tricipiti",c:"C",rm:24},
-  e38:{n:"Kickback cavo basso",m:"Tricipiti",c:"I",rm:7},
-  e39:{n:"Bicycle Crunch",m:"Addominali",c:"I",rm:0},e40:{n:"Crunch cavo alto",m:"Addominali",c:"I",rm:106},
-  e41:{n:"Leg Raise",m:"Addominali",c:"I",rm:0},e42:{n:"Sit Up",m:"Addominali",c:"I",rm:0},
-};
- 
-// BLOCKS: each has 4 days. Rotation: A-B-C-D
-// Primary muscle = 2 target exercises, Secondary = 1 target, rest = non-target
-// Day A: Petto(primary)/Spalle(secondary)/Bicipiti/Addominali
-// Day B: Gambe(primary)/Dorso(secondary)/Tricipiti
-// Day C: Spalle(primary)/Petto(secondary)/Bicipiti/Addominali
-// Day D: Dorso(primary)/Gambe(secondary)/Tricipiti
- 
-const BLOCKS=[
-  {id:"b1",name:"Forza Ipertrofica",icon:"🏋️",days:[
-    {name:"Giorno A",primary:"Petto",secondary:"Spalle",groups:[
-      {muscle:"Petto",exercises:[
-        {eid:"e1",s:4,r:5,pct:82,rest:180,tgt:1},// T1 - target primary
-        {eid:"e4",s:3,r:8,pct:72,rest:120,tgt:2},// T2 - target primary
-        {eid:"e6",s:3,r:12,pct:60,rest:60,tgt:0},// non-target
-      ]},
-      {muscle:"Spalle",exercises:[
-        {eid:"e24",s:3,r:8,pct:72,rest:120,tgt:3},// T3 - target secondary
-        {eid:"e25",s:3,r:12,pct:65,rest:60,tgt:0},
-      ]},
-      {muscle:"Bicipiti",exercises:[
-        {eid:"e30",s:3,r:10,pct:70,rest:60,tgt:0},
-        {eid:"e31",s:3,r:12,pct:65,rest:60,tgt:0},
-      ]},
-      {muscle:"Addominali",exercises:[
-        {eid:"e40",s:3,r:15,pct:60,rest:45,tgt:0},
-      ]},
-    ]},
-    {name:"Giorno B",primary:"Gambe",secondary:"Dorso",groups:[
-      {muscle:"Gambe",exercises:[
-        {eid:"e15",s:4,r:5,pct:82,rest:180,tgt:1},
-        {eid:"e16",s:3,r:8,pct:75,rest:150,tgt:2},
-        {eid:"e19",s:3,r:10,pct:70,rest:90,tgt:0},
-      ]},
-      {muscle:"Dorso",exercises:[
-        {eid:"e8",s:3,r:5,pct:85,rest:180,tgt:3},
-        {eid:"e9",s:3,r:10,pct:72,rest:90,tgt:0},
-        {eid:"e12",s:3,r:10,pct:70,rest:90,tgt:0},
-      ]},
-      {muscle:"Tricipiti",exercises:[
-        {eid:"e35",s:3,r:10,pct:70,rest:60,tgt:0},
-        {eid:"e36",s:3,r:12,pct:65,rest:60,tgt:0},
-      ]},
-    ]},
-    {name:"Giorno C",primary:"Spalle",secondary:"Petto",groups:[
-      {muscle:"Spalle",exercises:[
-        {eid:"e22",s:4,r:5,pct:82,rest:180,tgt:1},
-        {eid:"e23",s:3,r:8,pct:75,rest:120,tgt:2},
-        {eid:"e26",s:3,r:12,pct:65,rest:60,tgt:0},
-        {eid:"e28",s:3,r:12,pct:60,rest:60,tgt:0},
-      ]},
-      {muscle:"Petto",exercises:[
-        {eid:"e2",s:3,r:8,pct:78,rest:120,tgt:3},
-        {eid:"e5",s:3,r:10,pct:70,rest:90,tgt:0},
-        {eid:"e7",s:3,r:12,pct:60,rest:60,tgt:0},
-      ]},
-      {muscle:"Bicipiti",exercises:[
-        {eid:"e29",s:3,r:8,pct:72,rest:90,tgt:0},
-        {eid:"e33",s:3,r:10,pct:70,rest:60,tgt:0},
-      ]},
-      {muscle:"Addominali",exercises:[
-        {eid:"e41",s:3,r:15,pct:0,rest:45,tgt:0},
-      ]},
-    ]},
-    {name:"Giorno D",primary:"Dorso",secondary:"Gambe",groups:[
-      {muscle:"Dorso",exercises:[
-        {eid:"e14",s:4,r:7,pct:78,rest:150,tgt:1},
-        {eid:"e10",s:3,r:8,pct:78,rest:120,tgt:2},
-        {eid:"e13",s:3,r:10,pct:72,rest:90,tgt:0},
-      ]},
-      {muscle:"Gambe",exercises:[
-        {eid:"e17",s:3,r:8,pct:78,rest:120,tgt:3},
-        {eid:"e18",s:3,r:10,pct:72,rest:90,tgt:0},
-        {eid:"e20",s:3,r:10,pct:70,rest:90,tgt:0},
-      ]},
-      {muscle:"Tricipiti",exercises:[
-        {eid:"e37",s:3,r:10,pct:72,rest:90,tgt:0},
-        {eid:"e38",s:3,r:12,pct:65,rest:60,tgt:0},
-      ]},
-    ]},
-  ]},
-  // Block 2 and 3 share same day structure but can swap some isolation exercises
-  {id:"b2",name:"Trasformazione Ipertrofica",icon:"💪"},
-  {id:"b3",name:"Qualità Muscolare",icon:"🎯"},
+e1:{n:"Panca piana",m:"Petto",c:"F",rm:74},e2:{n:"Chest Press",m:"Petto",c:"C",rm:65},e3:{n:"Chest Press Incline",m:"Petto",c:"C",rm:53},e4:{n:"Spinte manubri panca piana",m:"Petto",c:"C",rm:25},e5:{n:"Spinte manubri panca 45°",m:"Petto",c:"C",rm:24},e6:{n:"Croci su panca piana",m:"Petto",c:"I",rm:12},e7:{n:"Croci ai cavi bassi",m:"Petto",c:"I",rm:6},
+e8:{n:"Stacco da terra",m:"Dorso",c:"F",rm:100},e9:{n:"Lat machine presa larga",m:"Dorso",c:"C",rm:60},e10:{n:"Lat machine presa media",m:"Dorso",c:"C",rm:69},e11:{n:"Lat machine triangolo",m:"Dorso",c:"C",rm:69},e12:{n:"Pulley machine triangolo",m:"Dorso",c:"C",rm:60},e13:{n:"Rematore manubrio",m:"Dorso",c:"C",rm:32},e14:{n:"Rematore T-bar triangolo",m:"Dorso",c:"C",rm:56},
+e15:{n:"Squat",m:"Gambe",c:"F",rm:103},e16:{n:"Leg press",m:"Gambe",c:"F",rm:151},e17:{n:"Stacco rumeno",m:"Gambe",c:"F",rm:99},e18:{n:"Leg curl machine",m:"Gambe",c:"C",rm:60},e19:{n:"Leg extension",m:"Gambe",c:"C",rm:60},e20:{n:"Affondi multipower",m:"Gambe",c:"C",rm:27},e21:{n:"Affondi manubri",m:"Gambe",c:"C",rm:25},
+e22:{n:"Military Press",m:"Spalle",c:"F",rm:50},e23:{n:"Military press multipower",m:"Spalle",c:"C",rm:53},e24:{n:"Spinte in alto manubri",m:"Spalle",c:"C",rm:24},e25:{n:"Alzate laterali in piedi",m:"Spalle",c:"I",rm:12},e26:{n:"Alzate laterali panca 30°",m:"Spalle",c:"I",rm:9},e27:{n:"Alzate laterali cavo basso",m:"Spalle",c:"I",rm:6},e28:{n:"Alzate posteriori panca",m:"Spalle",c:"I",rm:9},
+e29:{n:"Curl bilanciere EZ",m:"Bicipiti",c:"C",rm:25},e30:{n:"Curl manubri",m:"Bicipiti",c:"C",rm:13},e31:{n:"Curl panca 60°",m:"Bicipiti",c:"I",rm:11},e32:{n:"Curl cavo basso barra",m:"Bicipiti",c:"I",rm:20},e33:{n:"Hammer curl 60°",m:"Bicipiti",c:"I",rm:12},
+e34:{n:"French press bilanciere EZ",m:"Tricipiti",c:"C",rm:25},e35:{n:"French press ez panca",m:"Tricipiti",c:"C",rm:20},e36:{n:"French press corda cavo alto",m:"Tricipiti",c:"I",rm:32},e37:{n:"French press cavo basso",m:"Tricipiti",c:"C",rm:24},e38:{n:"Kickback cavo basso",m:"Tricipiti",c:"I",rm:7},
+e39:{n:"Bicycle Crunch",m:"Addominali",c:"I",rm:0},e40:{n:"Crunch cavo alto",m:"Addominali",c:"I",rm:106},e41:{n:"Leg Raise",m:"Addominali",c:"I",rm:0},e42:{n:"Sit Up",m:"Addominali",c:"I",rm:0}};
+
+const INIT_DAYS=[
+[{muscle:"Petto",exercises:[{eid:"e1",s:4,r:5,pct:82,rest:180,tgt:1},{eid:"e4",s:3,r:8,pct:72,rest:120,tgt:2},{eid:"e6",s:3,r:12,pct:60,rest:60,tgt:0}]},{muscle:"Spalle",exercises:[{eid:"e24",s:3,r:8,pct:72,rest:120,tgt:3},{eid:"e25",s:3,r:12,pct:65,rest:60,tgt:0}]},{muscle:"Bicipiti",exercises:[{eid:"e30",s:3,r:10,pct:70,rest:60,tgt:0},{eid:"e31",s:3,r:12,pct:65,rest:60,tgt:0}]},{muscle:"Addominali",exercises:[{eid:"e40",s:3,r:15,pct:60,rest:45,tgt:0}]}],
+[{muscle:"Gambe",exercises:[{eid:"e15",s:4,r:5,pct:82,rest:180,tgt:1},{eid:"e16",s:3,r:8,pct:75,rest:150,tgt:2},{eid:"e19",s:3,r:10,pct:70,rest:90,tgt:0}]},{muscle:"Dorso",exercises:[{eid:"e8",s:3,r:5,pct:85,rest:180,tgt:3},{eid:"e9",s:3,r:10,pct:72,rest:90,tgt:0},{eid:"e12",s:3,r:10,pct:70,rest:90,tgt:0}]},{muscle:"Tricipiti",exercises:[{eid:"e35",s:3,r:10,pct:70,rest:60,tgt:0},{eid:"e36",s:3,r:12,pct:65,rest:60,tgt:0}]}],
+[{muscle:"Spalle",exercises:[{eid:"e22",s:4,r:5,pct:82,rest:180,tgt:1},{eid:"e23",s:3,r:8,pct:75,rest:120,tgt:2},{eid:"e26",s:3,r:12,pct:65,rest:60,tgt:0},{eid:"e28",s:3,r:12,pct:60,rest:60,tgt:0}]},{muscle:"Petto",exercises:[{eid:"e2",s:3,r:8,pct:78,rest:120,tgt:3},{eid:"e5",s:3,r:10,pct:70,rest:90,tgt:0},{eid:"e7",s:3,r:12,pct:60,rest:60,tgt:0}]},{muscle:"Bicipiti",exercises:[{eid:"e29",s:3,r:8,pct:72,rest:90,tgt:0},{eid:"e33",s:3,r:10,pct:70,rest:60,tgt:0}]},{muscle:"Addominali",exercises:[{eid:"e41",s:3,r:15,pct:0,rest:45,tgt:0}]}],
+[{muscle:"Dorso",exercises:[{eid:"e14",s:4,r:7,pct:78,rest:150,tgt:1},{eid:"e10",s:3,r:8,pct:78,rest:120,tgt:2},{eid:"e13",s:3,r:10,pct:72,rest:90,tgt:0}]},{muscle:"Gambe",exercises:[{eid:"e17",s:3,r:8,pct:78,rest:120,tgt:3},{eid:"e18",s:3,r:10,pct:72,rest:90,tgt:0},{eid:"e20",s:3,r:10,pct:70,rest:90,tgt:0}]},{muscle:"Tricipiti",exercises:[{eid:"e37",s:3,r:10,pct:72,rest:90,tgt:0},{eid:"e38",s:3,r:12,pct:65,rest:60,tgt:0}]}]
 ];
-// Blocks 2 & 3 reuse block 1 days (same rotation, same targets) - in a real app these would differ slightly
-BLOCKS[1].days=JSON.parse(JSON.stringify(BLOCKS[0].days));
-BLOCKS[2].days=JSON.parse(JSON.stringify(BLOCKS[0].days));
- 
-// Phases within each block
-const PHASES=[
-  {id:"test",name:"Test Carichi",weeks:1},
-  {id:"f1",name:"Fase 1",weeks:5},
-  {id:"f2",name:"Fase 2",weeks:5},
-  {id:"sc",name:"Scarico",weeks:1},
-  {id:"f3",name:"Fase 3",weeks:4},
-];
-const totalWeeks=16;
- 
-// PROGRESSION LOGIC for target exercises
-// tgt: 1=T1(first target primary), 2=T2(second target primary), 3=T3(target secondary)
-// Returns {ds: delta sets, dr: delta reps, dw: weight multiplier}
-function getProgression(weekInBlock, tgtType){
-  const w=weekInBlock; // 0-based (0=test, 1-5=fase1, 6-10=fase2, 11=scarico, 12-15=fase3)
-  if(tgtType===0) return {ds:0,dr:0,dw:1}; // non-target: no progression
- 
-  // Test carichi week
-  if(w===0) return {ds:0,dr:0,dw:1};
- 
-  // FASE 1: weeks 1-5
-  if(w>=1 && w<=2){
-    return {ds:0,dr:0,dw:1}; // base
-  }
-  if(w===3){
-    if(tgtType===1||tgtType===2) return {ds:1,dr:0,dw:1}; // +1 set on T1,T2
-    return {ds:0,dr:0,dw:1}; // T3 stays
-  }
-  if(w>=4 && w<=5){
-    return {ds:1,dr:0,dw:1}; // +1 set on all targets
-  }
- 
-  // FASE 2: weeks 6-10
-  if(w>=6 && w<=7){
-    return {ds:0,dr:1,dw:1}; // reset sets, +1 rep
-  }
-  if(w>=8 && w<=9){
-    return {ds:1,dr:1,dw:1}; // +1 set, +1 rep
-  }
-  if(w===10){
-    if(tgtType===1||tgtType===3) return {ds:0,dr:2,dw:1}; // T1,T3: -1set from w8(=base), +2rep
-    return {ds:1,dr:1,dw:1}; // T2 stays as w8-9
-  }
- 
-  // SCARICO: week 11
-  if(w===11){
-    return {ds:-1,dr:0,dw:0.8}; // halved volume approx, -20% weight
-  }
- 
-  // FASE 3: weeks 12-15 (higher weight)
-  const WM=1.05; // +5% weight for fase 3
-  if(w===12){
-    return {ds:0,dr:0,dw:WM}; // base sets/reps but heavier
-  }
-  if(w===13){
-    if(tgtType===1) return {ds:1,dr:0,dw:WM};  // T1: +1 set
-    if(tgtType===2) return {ds:0,dr:1,dw:WM};   // T2: +1 rep
-    if(tgtType===3) return {ds:1,dr:0,dw:WM};   // T3: +1 set
-    return {ds:0,dr:0,dw:WM};
-  }
-  if(w===14){
-    if(tgtType===1) return {ds:1,dr:0,dw:WM};
-    if(tgtType===2) return {ds:1,dr:1,dw:WM};   // T2: +1set (from w13)
-    if(tgtType===3) return {ds:0,dr:1,dw:WM};   // T3: -1set+1rep from w13
-    return {ds:0,dr:0,dw:WM};
-  }
-  if(w===15){
-    if(tgtType===1) return {ds:1,dr:-1,dw:WM*1.025}; // T1: -1rep, even more weight
-    if(tgtType===2) return {ds:0,dr:-1,dw:WM};        // T2: -1set-2rep from w14 → net: base sets, base reps -1
-    if(tgtType===3) return {ds:0,dr:2,dw:WM};         // T3: +1rep from w14
-    return {ds:0,dr:0,dw:WM};
-  }
-  return {ds:0,dr:0,dw:1};
-}
- 
-function computeExercise(base, weekInBlock, exDb){
-  const prog=getProgression(weekInBlock, base.tgt);
-  const sets=Math.max(1, base.s + prog.ds);
-  const reps=Math.max(1, base.r + prog.dr);
-  const adjPct=base.pct * prog.dw;
-  const rm=exDb[base.eid]?.rm||0;
-  const load=rm>0?Math.round(rm*adjPct/100*4)/4:0;
-  return {sets,reps,pct:Math.round(adjPct),load,rest:base.rest};
-}
- 
-function getPhaseForWeek(w){
-  if(w===0) return PHASES[0];
-  if(w<=5) return PHASES[1];
-  if(w<=10) return PHASES[2];
-  if(w===11) return PHASES[3];
-  return PHASES[4];
-}
- 
-// ────── APP ──────
-const SK="vt-v12";
-const ld=()=>{try{return JSON.parse(localStorage.getItem(SK))}catch{return null}};
-const sv=d=>{try{localStorage.setItem(SK,JSON.stringify(d))}catch{}};
- 
+const DAY_META=[{primary:"Petto",secondary:"Spalle"},{primary:"Gambe",secondary:"Dorso"},{primary:"Spalle",secondary:"Petto"},{primary:"Dorso",secondary:"Gambe"}];
+
+const PHASES=[{id:"test",w:1},{id:"f1",w:5},{id:"f2",w:5},{id:"sc",w:1},{id:"f3",w:4}];
+const TW=16;const phaseStart=[0,1,6,11,12];
+function gPI(w){if(w===0)return 0;if(w<=5)return 1;if(w<=10)return 2;if(w===11)return 3;return 4}
+function gP(w,tgt){if(!tgt)return{ds:0,dr:0,dw:1};if(w===0)return{ds:0,dr:0,dw:1};if(w<=2)return{ds:0,dr:0,dw:1};if(w===3)return tgt<=2?{ds:1,dr:0,dw:1}:{ds:0,dr:0,dw:1};if(w<=5)return{ds:1,dr:0,dw:1};if(w<=7)return{ds:0,dr:1,dw:1};if(w<=9)return{ds:1,dr:1,dw:1};if(w===10)return(tgt===1||tgt===3)?{ds:0,dr:2,dw:1}:{ds:1,dr:1,dw:1};if(w===11)return{ds:-1,dr:0,dw:.8};const W=1.05;if(w===12)return{ds:0,dr:0,dw:W};if(w===13)return(tgt===1||tgt===3)?{ds:1,dr:0,dw:W}:tgt===2?{ds:0,dr:1,dw:W}:{ds:0,dr:0,dw:W};if(w===14)return tgt===1?{ds:1,dr:0,dw:W}:tgt===2?{ds:1,dr:1,dw:W}:tgt===3?{ds:0,dr:1,dw:W}:{ds:0,dr:0,dw:W};if(w===15)return tgt===1?{ds:1,dr:-1,dw:W*1.025}:tgt===2?{ds:0,dr:-1,dw:W}:tgt===3?{ds:0,dr:2,dw:W}:{ds:0,dr:0,dw:W};return{ds:0,dr:0,dw:1}}
+function comp(b,w,db){const p=gP(w,b.tgt);const s=Math.max(1,b.s+p.ds);const r=Math.max(1,b.r+p.dr);const ap=b.pct*p.dw;const rm=db[b.eid]?.rm||0;const ld=rm>0?Math.round(rm*ap/100*4)/4:0;return{sets:s,reps:r,pct:Math.round(ap),load:ld,rest:b.rest}}
+
+const SK="vt-v18";const ld=()=>{try{return JSON.parse(localStorage.getItem(SK))}catch{return null}};const sv=d=>{try{localStorage.setItem(SK,JSON.stringify(d))}catch{}};
+
 function App(){
-  const savedState=ld();
-  const[block,setBlock]=useState(savedState?.block||0);
-  const[week,setWeek]=useState(savedState?.week||0);
-  const[dayIdx,setDayIdx]=useState(0);
-  const[view,setView]=useState("w");
-  const[modal,setModal]=useState(null);
-  const[toast,setToast]=useState("");
-  const[done,setDone]=useState(savedState?.done||{});
-  const[exDb,setExDb]=useState(savedState?.exDb||{...EX});
- 
-  useEffect(()=>{sv({block,week,done,exDb})},[block,week,done,exDb]);
-  const flash=m=>{setToast(m);setTimeout(()=>setToast(""),1800)};
- 
-  const blk=BLOCKS[block];
-  const day=blk.days[dayIdx];
-  const phase=getPhaseForWeek(week);
- 
-  const tglDone=(gi,ei)=>{const k=`${block}-${week}-${dayIdx}-${gi}-${ei}`;setDone(d=>({...d,[k]:!d[k]}))};
-  const isDone=(gi,ei)=>done[`${block}-${week}-${dayIdx}-${gi}-${ei}`]||false;
- 
-  // Volume calc
-  const weeklyVol=useMemo(()=>{
-    const v={};MU.forEach(m=>v[m]={s:0,r:0});
-    blk.days.forEach(d=>d.groups.forEach(g=>g.exercises.forEach(ex=>{
-      const c=computeExercise(ex,week,exDb);
-      v[g.muscle].s+=c.sets;v[g.muscle].r+=c.sets*c.reps;
-    })));return v;
-  },[block,week,exDb]);
- 
-  const tgtLabel=t=>t===1?"T1":t===2?"T2":t===3?"T3":"";
- 
-  return React.createElement(React.Fragment,null,
-    // HEADER
-    React.createElement("div",{className:"hdr"},
-      React.createElement("h1",null,"V",React.createElement("b",null,"-Trainer")),
-      React.createElement("span",{className:"badge"},"GB")),
- 
-    // CONTROLS
-    React.createElement("div",{className:"ctrl"},
-      // Block selector
-      React.createElement("div",{className:"blocks"},
-        BLOCKS.map((b,i)=>React.createElement("button",{key:b.id,className:"blk"+(block===i?" on":""),
-          onClick:()=>{setBlock(i);setWeek(0);setDayIdx(0)}},b.icon+" "+b.name))),
-      // Phase selector
-      React.createElement("div",{className:"prow"},
-        PHASES.map((p,pi)=>{
-          const startW=[0,1,6,11,12][pi];
-          const isActive=week>=startW&&week<startW+p.weeks;
-          return React.createElement("button",{key:p.id,className:"ph"+(isActive?" on":""),
-            onClick:()=>setWeek(startW)},p.name+" ("+p.weeks+"s)")
-        })),
-      // Week bar
-      React.createElement("div",{className:"wbar"},
-        React.createElement("button",{className:"wb",onClick:()=>setWeek(Math.max(0,week-1))},"‹"),
-        React.createElement("div",null,
-          React.createElement("div",{className:"wl"},"Sett. "+(week+1)+"/"+totalWeeks+" · "+phase.name),
-          React.createElement("div",{className:"dots"},Array.from({length:totalWeeks},(_,i)=>
-            React.createElement("div",{key:i,className:"dot"+(i<=week?" on":"")})))),
-        React.createElement("button",{className:"wb",onClick:()=>setWeek(Math.min(totalWeeks-1,week+1))},"›"))),
- 
-    // DAY TABS
-    view==="w"&&React.createElement("div",{className:"dtabs"},
-      blk.days.map((d,i)=>React.createElement("button",{key:i,className:"dt"+(dayIdx===i?" on":""),
-        onClick:()=>setDayIdx(i)},d.name))),
- 
-    // SCROLL CONTENT
-    React.createElement("div",{className:"scroll"},
- 
-      // WORKOUT VIEW
-      view==="w"&&day.groups.map((g,gi)=>React.createElement("div",{className:"sec",key:gi},
-        React.createElement("div",{className:"sh"},
-          React.createElement("div",{style:{display:"flex",alignItems:"center"}},
-            React.createElement("span",{className:"stitle",style:{color:MC(g.muscle)}},g.muscle),
-            g.muscle===day.primary&&React.createElement("span",{className:"slabel",style:{background:"#fef2f2",color:"var(--red)"}},"Primario"),
-            g.muscle===day.secondary&&React.createElement("span",{className:"slabel",style:{background:"#eff6ff",color:"var(--blu)"}},"Secondario"))),
-        g.exercises.map((ex,ei)=>{
-          const d=exDb[ex.eid];if(!d)return null;
-          const c=computeExercise(ex,week,exDb);
-          const ms=c.load>0?c.sets+"x"+c.reps+"@"+c.load+"kg":c.sets+"x"+c.reps;
-          const dn=isDone(gi,ei);
-          const cc=CC(d.c);
-          return React.createElement("div",{className:"exr",key:ei},
-            React.createElement("div",{className:"eck"+(dn?" dn":""),onClick:()=>tglDone(gi,ei)}),
-            React.createElement("div",{className:"exi",onClick:()=>setModal({gi,ei})},
-              React.createElement("div",{className:"exn"},d.n,
-                React.createElement("span",{className:"exc",style:{background:cc.b,color:cc.c}},CATS[d.c]),
-                ex.tgt>0&&React.createElement("span",{className:"exc",style:{background:"#fef2f2",color:"var(--red)"}},tgtLabel(ex.tgt))),
-              React.createElement("div",{className:"exm"},
-                ex.tgt>0&&React.createElement("span",{className:"tgt"},"Target "),ms,
-                " · ",c.rest+"s rec")),
-            React.createElement("span",{className:"arrow",onClick:()=>setModal({gi,ei})},"›"))}))),
- 
-      // VOLUME VIEW
-      view==="v"&&React.createElement("div",{style:{padding:16}},
-        React.createElement("h3",{style:{marginBottom:2}},"Volume Settimanale"),
-        React.createElement("p",{style:{fontSize:11,color:"var(--dm)",marginBottom:14}},"Sett. "+(week+1)+" · "+phase.name+" · "+blk.name),
-        MU.map(m=>{const v=weeklyVol[m];return React.createElement("div",{className:"vcard",key:m},
-          React.createElement("div",{style:{fontWeight:700,color:MC(m),fontSize:14}},m),
-          React.createElement("div",{style:{display:"flex",gap:16,marginTop:4}},
-            React.createElement("div",null,React.createElement("span",{style:{fontFamily:"var(--m)",fontSize:16,fontWeight:700}},v.s),React.createElement("span",{style:{fontSize:9,color:"var(--dm)",marginLeft:3}},"serie")),
-            React.createElement("div",null,React.createElement("span",{style:{fontFamily:"var(--m)",fontSize:16,fontWeight:700}},v.r),React.createElement("span",{style:{fontSize:9,color:"var(--dm)",marginLeft:3}},"reps"))),
-          React.createElement("div",{className:"vbar"},React.createElement("div",{className:"vfill",style:{width:Math.min(100,v.s/25*100)+"%",background:MC(m)}})))})),
- 
-      // LIBRARY VIEW
-      view==="l"&&React.createElement("div",{style:{padding:16}},
-        React.createElement("h3",{style:{marginBottom:10}},"Libreria Esercizi"),
-        MU.map(m=>{const exs=Object.entries(exDb).filter(([,e])=>e.m===m);if(!exs.length)return null;return React.createElement("div",{key:m},
-          React.createElement("div",{style:{fontSize:11,fontWeight:700,color:MC(m),padding:"10px 0 3px",textTransform:"uppercase"}},m),
-          exs.map(([id,ex])=>{const cc=CC(ex.c);return React.createElement("div",{key:id,style:{display:"flex",alignItems:"center",gap:5,padding:"7px 0",borderBottom:"1px solid var(--sf2)"}},
-            React.createElement("span",{style:{flex:1,fontSize:12,fontWeight:500}},ex.n),
-            React.createElement("span",{style:{fontSize:8,padding:"1px 4px",borderRadius:3,fontWeight:700,background:cc.b,color:cc.c}},CATS[ex.c]),
-            React.createElement("input",{type:"number",inputMode:"numeric",value:ex.rm,style:{width:48,padding:4,border:"1px solid var(--bd)",borderRadius:5,fontFamily:"var(--m)",fontSize:11,textAlign:"center",background:"var(--sf)"},
-              onChange:e=>{const v=parseFloat(e.target.value)||0;setExDb(d=>({...d,[id]:{...d[id],rm:v}}))}}),
-            React.createElement("span",{style:{fontSize:9,color:"var(--dm)"}},"kg"))}))})),
- 
-      // 1RM CALC VIEW
-      view==="r"&&React.createElement(RMCalc,{exDb,setExDb,flash})
-    ),
- 
-    // DETAIL MODAL
-    modal&&(()=>{
-      const g=day.groups[modal.gi];const ex=g?.exercises[modal.ei];if(!ex)return null;
-      const d=exDb[ex.eid];if(!d)return null;
-      const c=computeExercise(ex,week,exDb);
-      const prog=getProgression(week,ex.tgt);
-      return React.createElement("div",{className:"ov",onClick:()=>setModal(null)},
-        React.createElement("div",{className:"mod",onClick:e=>e.stopPropagation()},
-          React.createElement("div",{className:"mbar"}),
-          React.createElement("h3",null,d.n),
-          React.createElement("div",{className:"msub"},
-            ex.tgt>0&&React.createElement("span",{style:{color:"var(--red)",fontWeight:700}},tgtLabel(ex.tgt)+" Target · "),
-            CATS[d.c]," · 1RM: ",d.rm,"kg"),
-          React.createElement("div",{className:"dcomp"},
-            React.createElement("div",{style:{fontWeight:700,marginBottom:6,fontSize:12}},"📈 Settimana "+(week+1)+" – "+phase.name),
-            [["Serie",c.sets+(prog.ds!==0?" ("+(prog.ds>0?"+":"")+prog.ds+")":"")],
-             ["Reps",c.reps+(prog.dr!==0?" ("+(prog.dr>0?"+":"")+prog.dr+")":"")],
-             ["% 1RM",c.pct+"%","var(--orn)"],
-             ["Carico",c.load>0?c.load+" kg":"Corpo libero","var(--grn)"],
-             ["Recupero",c.rest+"s"],
-             ["Volume",c.sets*c.reps+" reps tot"]
-            ].map(([l,v,cl])=>React.createElement("div",{className:"dcr",key:l},
-              React.createElement("span",{className:"dcl"},l),
-              React.createElement("span",{className:"dcv",style:{color:cl||"inherit"}},v)))),
-          ex.tgt>0&&React.createElement("div",{style:{background:"#fff7ed",borderRadius:"var(--r)",padding:10,margin:"8px 0",fontSize:11,color:"var(--orn)"}},
-            "🔒 Esercizio Target – le progressioni sono calcolate automaticamente settimana per settimana."),
-          React.createElement("div",{style:{fontSize:11,color:"var(--dm)",marginTop:8,lineHeight:1.5}},
-            "Base: ",ex.s,"×",ex.r," @ ",ex.pct,"% · ",
-            prog.ds!==0&&("ΔSerie: "+(prog.ds>0?"+":"")+prog.ds+" "),
-            prog.dr!==0&&("ΔReps: "+(prog.dr>0?"+":"")+prog.dr+" "),
-            prog.dw!==1&&("Peso: ×"+prog.dw.toFixed(2))),
-          React.createElement("button",{className:"btn btn-p",onClick:()=>setModal(null)},"Chiudi")))
-    })(),
- 
-    toast&&React.createElement("div",{className:"toast"},toast),
- 
-    // BOTTOM NAV
-    React.createElement("div",{className:"bnav"},
-      [["w","📋","Scheda"],["v","📊","Volume"],["l","🗂","Esercizi"],["r","🧮","1RM"]].map(([k,i,l])=>
-        React.createElement("button",{key:k,className:"nb"+(view===k?" on":""),onClick:()=>setView(k)},
-          React.createElement("span",{className:"ni"},i),l)))
-  );
-}
- 
-function RMCalc({exDb,setExDb,flash}){
-  const[w,sW]=useState("");const[r,sR]=useState("");const[res,sRes]=useState(null);const[sel,sSel]=useState("");
-  const calc=()=>{const wt=parseFloat(w),rp=parseInt(r);if(!wt||!rp||rp<1)return;sRes(rp===1?wt:Math.round(wt/(1.0278-0.0278*rp)))};
-  const iS={width:"100%",padding:10,border:"1.5px solid var(--bd)",borderRadius:8,fontFamily:"var(--m)",fontSize:15,background:"var(--sf)"};
-  return React.createElement("div",{style:{padding:16}},
-    React.createElement("h3",{style:{marginBottom:2}},"Calcola 1RM"),
-    React.createElement("p",{style:{fontSize:11,color:"var(--dm)",marginBottom:12}},"Formula di Brzycki"),
-    React.createElement("div",{style:{background:"var(--sf)",border:"1px solid var(--bd)",borderRadius:"var(--r)",padding:14}},
-      React.createElement("div",{className:"drow"},
-        React.createElement("div",null,React.createElement("div",{className:"dlbl"},"Carico (kg)"),React.createElement("input",{className:"dinp",type:"number",inputMode:"decimal",value:w,onChange:e=>sW(e.target.value)})),
-        React.createElement("div",null,React.createElement("div",{className:"dlbl"},"Ripetizioni"),React.createElement("input",{className:"dinp",type:"number",inputMode:"numeric",value:r,onChange:e=>sR(e.target.value)}))),
-      React.createElement("button",{className:"btn btn-p",onClick:calc},"Calcola"),
-      res&&React.createElement(React.Fragment,null,
-        React.createElement("div",{style:{fontFamily:"var(--m)",fontSize:28,fontWeight:700,color:"var(--grn)",textAlign:"center",padding:"12px 0"}},res+" kg"),
-        React.createElement("div",{style:{display:"flex",gap:5,alignItems:"end",marginBottom:6}},
-          React.createElement("div",{style:{flex:1}},React.createElement("div",{className:"dlbl"},"Salva su esercizio"),
-            React.createElement("select",{className:"dinp",value:sel,onChange:e=>sSel(e.target.value),style:{fontSize:12}},
-              React.createElement("option",{value:""},"-- Seleziona --"),
-              Object.entries(exDb).map(([id,ex])=>React.createElement("option",{key:id,value:id},ex.n)))),
-          React.createElement("button",{style:{padding:"8px 14px",border:"none",borderRadius:8,background:"var(--tx)",color:"#fff",fontWeight:700,cursor:"pointer",height:40},
-            onClick:()=>{if(!sel)return;setExDb(d=>({...d,[sel]:{...d[sel],rm:res}}));flash("1RM → "+res+"kg!")}},"Salva")),
-        React.createElement("div",{style:{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:3,marginTop:10}},
-          [100,95,90,85,80,75,70,65,60,50].map(p=>React.createElement("div",{key:p,style:{background:"var(--sf2)",borderRadius:5,padding:4,textAlign:"center"}},
-            React.createElement("div",{style:{fontSize:8,color:"var(--dm)"}},p+"%"),
-            React.createElement("div",{style:{fontFamily:"var(--m)",fontSize:11,fontWeight:600}},Math.round(res*p/100*4)/4)))))));
-}
- 
+const saved=ld()||{};
+const[block,setBlock]=useState(saved.block||0);
+const[week,setWeek]=useState(saved.week||0);
+const[dayIdx,setDayIdx]=useState(0);
+const[view,setView]=useState("w");
+const[modal,setModal]=useState(null);// {type:"detail"|"swap"|"add",gi,ei,muscle}
+const[toast,setToast]=useState("");
+const[done,setDone]=useState(saved.done||{});
+const[wDone,setWDone]=useState(saved.wDone||{});
+const[exDb,setExDb]=useState(saved.exDb||{...EX});
+const[lang,setLang]=useState(saved.lang||"it");
+// Mutable days per block
+const[customDays,setCustomDays]=useState(saved.customDays||{0:JSON.parse(JSON.stringify(INIT_DAYS)),1:JSON.parse(JSON.stringify(INIT_DAYS)),2:JSON.parse(JSON.stringify(INIT_DAYS))});
+
+useEffect(()=>{sv({block,week,done,wDone,exDb,lang,customDays})},[block,week,done,wDone,exDb,lang,customDays]);
+const flash=m=>{setToast(m);setTimeout(()=>setToast(""),1800)};
+const t=T[lang];const tM=m=>t.muscles[m]||m;
+
+const days=customDays[block]||INIT_DAYS;
+const day=days[dayIdx];
+const meta=DAY_META[dayIdx];
+const phIdx=gPI(week);
+
+const updDay=(fn)=>{setCustomDays(cd=>{const n=JSON.parse(JSON.stringify(cd));if(!n[block])n[block]=JSON.parse(JSON.stringify(INIT_DAYS));fn(n[block][dayIdx]);return n})};
+
+const tglDone=(gi,ei)=>{const k=`${block}-${week}-${dayIdx}-${gi}-${ei}`;setDone(d=>({...d,[k]:!d[k]}))};
+const isDn=(gi,ei)=>done[`${block}-${week}-${dayIdx}-${gi}-${ei}`]||false;
+const wKey=(b,w,d)=>`${b}-${w}-${d}`;const isWD=(b,w,d)=>wDone[wKey(b,w,d)]||false;
+const toggleWD=()=>{const k=wKey(block,week,dayIdx);setWDone(d=>({...d,[k]:!d[k]}));flash(wDone[wKey(block,week,dayIdx)]?t.undoComplete:t.completed)};
+
+const weeklyVol=useMemo(()=>{const v={};MU.forEach(m=>v[m]={s:0,r:0});days.forEach(d=>d.forEach(g=>g.exercises.forEach(ex=>{const c=comp(ex,week,exDb);v[g.muscle].s+=c.sets;v[g.muscle].r+=c.sets*c.reps})));return v},[days,week,exDb]);
+
+const tgtL=t=>t===1?"T1":t===2?"T2":t===3?"T3":"";
+const dayL=["A","B","C","D"];
+
+// Exercise management
+const swapExercise=(gi,ei,newEid)=>{updDay(d=>{d[gi].exercises[ei].eid=newEid});setModal(null);flash("✓")};
+const removeExercise=(gi,ei)=>{updDay(d=>{d[gi].exercises.splice(ei,1)});setModal(null);flash("✓")};
+const addExercise=(gi,eid)=>{updDay(d=>{d[gi].exercises.push({eid,s:3,r:10,pct:70,rest:90,tgt:0})});setModal(null);flash("✓")};
+
+// Get available exercises for a muscle (not already in this group)
+const availEx=(muscle,excludeEids)=>Object.entries(exDb).filter(([id,e])=>e.m===muscle&&!excludeEids.includes(id));
+
+return React.createElement(React.Fragment,null,
+// HEADER
+React.createElement("div",{className:"hdr"},React.createElement("h1",null,"V",React.createElement("b",null,"-Trainer")),
+React.createElement("div",{className:"hdr-r"},
+React.createElement("button",{className:"lang-btn"+(lang==="it"?" on":""),onClick:()=>setLang("it")},"IT"),
+React.createElement("button",{className:"lang-btn"+(lang==="en"?" on":""),onClick:()=>setLang("en")},"EN"),
+React.createElement("span",{className:"badge"},"GB"))),
+// CONTROLS
+React.createElement("div",{className:"ctrl"},
+React.createElement("div",{className:"blocks"},[0,1,2].map(i=>React.createElement("button",{key:i,className:"blk"+(block===i?" on":""),onClick:()=>{setBlock(i);setWeek(0);setDayIdx(0)}},["🏋️","💪","🎯"][i]+" "+t.blocks[i]))),
+React.createElement("div",{className:"prow"},PHASES.map((p,pi)=>React.createElement("button",{key:p.id,className:"ph"+(phIdx===pi?" on":""),onClick:()=>setWeek(phaseStart[pi])},t.phases[pi]+" ("+p.w+"s)"))),
+React.createElement("div",{className:"wbar"},
+React.createElement("button",{className:"wb",onClick:()=>setWeek(Math.max(0,week-1))},"‹"),
+React.createElement("div",null,React.createElement("div",{className:"wl"},t.week+" "+(week+1)+t.of+TW+" · "+t.phases[phIdx]),
+React.createElement("div",{className:"dots"},Array.from({length:TW},(_,i)=>React.createElement("div",{key:i,className:"dot"+(i<=week?" on":"")})))),
+React.createElement("button",{className:"wb",onClick:()=>setWeek(Math.min(TW-1,week+1))},"›"))),
+// DAY TABS
+view==="w"&&React.createElement("div",{className:"dtabs"},[0,1,2,3].map(i=>{const wd=isWD(block,week,i);return React.createElement("button",{key:i,className:"dt"+(dayIdx===i?" on":""),onClick:()=>setDayIdx(i)},t.dayNames[i],wd&&React.createElement("span",{className:"dcheck"},"✓"))})),
+// SCROLL
+React.createElement("div",{className:"scroll"},
+// WORKOUT
+view==="w"&&React.createElement(React.Fragment,null,
+day.map((g,gi)=>React.createElement("div",{className:"sec",key:gi},
+React.createElement("div",{className:"sh"},React.createElement("div",{style:{display:"flex",alignItems:"center"}},
+React.createElement("span",{className:"stitle",style:{color:MC(g.muscle)}},tM(g.muscle)),
+g.muscle===meta.primary&&React.createElement("span",{className:"slabel",style:{background:"#fef2f2",color:"var(--red)"}},t.primary),
+g.muscle===meta.secondary&&React.createElement("span",{className:"slabel",style:{background:"#eff6ff",color:"var(--blu)"}},t.secondary))),
+g.exercises.map((ex,ei)=>{const d=exDb[ex.eid];if(!d)return null;const c=comp(ex,week,exDb);
+const ms=c.load>0?c.sets+"x"+c.reps+"@"+c.load+"kg":c.sets+"x"+c.reps;const dn=isDn(gi,ei);const cc=CC(d.c);
+return React.createElement("div",{className:"exr",key:ei},
+React.createElement("div",{className:"eck"+(dn?" dn":""),onClick:()=>tglDone(gi,ei)}),
+React.createElement("div",{className:"exi",onClick:()=>setModal({type:"detail",gi,ei})},
+React.createElement("div",{className:"exn"},d.n,React.createElement("span",{className:"exc",style:{background:cc.b,color:cc.c}},t.cats[d.c]),
+ex.tgt>0&&React.createElement("span",{className:"exc",style:{background:"#fef2f2",color:"var(--red)"}},tgtL(ex.tgt))),
+React.createElement("div",{className:"exm"},ex.tgt>0&&React.createElement("span",{className:"tgt"},t.target+" "),ms," · ",c.rest+"s ",t.rest.toLowerCase())),
+React.createElement("span",{className:"arrow",onClick:()=>setModal({type:"detail",gi,ei})},"›"))}),
+// ADD EXERCISE BUTTON
+React.createElement("button",{className:"addb",onClick:()=>setModal({type:"add",gi,muscle:g.muscle})},t.addEx))),
+React.createElement("button",{className:"complete-btn "+(isWD(block,week,dayIdx)?"done":"notdone"),onClick:toggleWD},isWD(block,week,dayIdx)?t.completed:t.complete)),
+
+// LOG
+view==="log"&&React.createElement("div",{className:"log-grid"},Array.from({length:TW*4},(_,i)=>{const w=Math.floor(i/4);const d=i%4;const wd=isWD(block,w,d);const isCur=w===week&&d===dayIdx;const dy=days[d];
+return React.createElement("div",{key:i,className:"log-card"+(wd?" completed":"")+(isCur?" today":""),onClick:()=>{setWeek(w);setDayIdx(d);setView("w")}},
+isCur&&React.createElement("span",{className:"lc-today"},t.today),
+React.createElement("div",{className:"lc-badge "+(wd?"done":"pending")},wd?"✓":dayL[d]),
+React.createElement("div",{className:"lc-num"},t.workout+" "+(block*TW*4+i+1)),
+React.createElement("div",{className:"lc-day"},t.dayNames[d]+" · "+t.week+" "+(w+1)),
+React.createElement("div",{className:"lc-muscles"},dy.map(g=>React.createElement("span",{key:g.muscle,className:"lc-m",style:{background:MC(g.muscle)+"20",color:MC(g.muscle)}},tM(g.muscle)))))})),
+
+// VOLUME
+view==="v"&&React.createElement("div",{style:{padding:16}},React.createElement("h3",{style:{marginBottom:2}},t.weeklyVol),
+React.createElement("p",{style:{fontSize:11,color:"var(--dm)",marginBottom:14}},t.week+" "+(week+1)+" · "+t.phases[phIdx]),
+MU.map(m=>{const v=weeklyVol[m];return React.createElement("div",{className:"vcard",key:m},
+React.createElement("div",{style:{fontWeight:700,color:MC(m),fontSize:14}},tM(m)),
+React.createElement("div",{style:{display:"flex",gap:16,marginTop:4}},
+React.createElement("div",null,React.createElement("span",{style:{fontFamily:"var(--m)",fontSize:16,fontWeight:700}},v.s),React.createElement("span",{style:{fontSize:9,color:"var(--dm)",marginLeft:3}},t.setsPerW)),
+React.createElement("div",null,React.createElement("span",{style:{fontFamily:"var(--m)",fontSize:16,fontWeight:700}},v.r),React.createElement("span",{style:{fontSize:9,color:"var(--dm)",marginLeft:3}},t.totalReps))),
+React.createElement("div",{className:"vbar"},React.createElement("div",{className:"vfill",style:{width:Math.min(100,v.s/25*100)+"%",background:MC(m)}})))})),
+
+// LIBRARY
+view==="l"&&React.createElement("div",{style:{padding:16}},React.createElement("h3",{style:{marginBottom:10}},t.library),
+MU.map(m=>{const exs=Object.entries(exDb).filter(([,e])=>e.m===m);if(!exs.length)return null;return React.createElement("div",{key:m},
+React.createElement("div",{style:{fontSize:11,fontWeight:700,color:MC(m),padding:"10px 0 3px",textTransform:"uppercase"}},tM(m)),
+exs.map(([id,ex])=>{const cc=CC(ex.c);return React.createElement("div",{key:id,style:{display:"flex",alignItems:"center",gap:5,padding:"7px 0",borderBottom:"1px solid var(--sf2)"}},
+React.createElement("span",{style:{flex:1,fontSize:12,fontWeight:500}},ex.n),
+React.createElement("span",{style:{fontSize:8,padding:"1px 4px",borderRadius:3,fontWeight:700,background:cc.b,color:cc.c}},t.cats[ex.c]),
+React.createElement("input",{type:"number",inputMode:"numeric",value:ex.rm,style:{width:48,padding:4,border:"1px solid var(--bd)",borderRadius:5,fontFamily:"var(--m)",fontSize:11,textAlign:"center"},onChange:e=>{const v=parseFloat(e.target.value)||0;setExDb(d=>({...d,[id]:{...d[id],rm:v}}))}}),
+React.createElement("span",{style:{fontSize:9,color:"var(--dm)"}},"kg"))}))})),
+
+// 1RM
+view==="r"&&React.createElement(RMCalc,{exDb,setExDb,flash,t})),
+
+// ──── MODALS ────
+
+// DETAIL MODAL
+modal?.type==="detail"&&(()=>{const g=day[modal.gi];const ex=g?.exercises[modal.ei];if(!ex)return null;
+const d=exDb[ex.eid];if(!d)return null;const c=comp(ex,week,exDb);const p=gP(week,ex.tgt);
+return React.createElement("div",{className:"ov",onClick:()=>setModal(null)},React.createElement("div",{className:"mod",onClick:e=>e.stopPropagation()},
+React.createElement("div",{className:"mbar"}),React.createElement("h3",null,d.n),
+React.createElement("div",{className:"msub"},ex.tgt>0&&React.createElement("span",{style:{color:"var(--red)",fontWeight:700}},tgtL(ex.tgt)+" "+t.target+" · "),t.cats[d.c]," · 1RM: ",d.rm,"kg"),
+React.createElement("div",{className:"dcomp"},
+React.createElement("div",{style:{fontWeight:700,marginBottom:6,fontSize:12}},"📈 "+t.week+" "+(week+1)+" – "+t.phases[phIdx]),
+[[t.sets,c.sets+(p.ds?(" ("+(p.ds>0?"+":"")+p.ds+")"):"")],[t.reps,c.reps+(p.dr?(" ("+(p.dr>0?"+":"")+p.dr+")"):"")],[t.pct,c.pct+"%","var(--orn)"],[t.load,c.load>0?c.load+" kg":t.bodyweight,"var(--grn)"],[t.rest,c.rest+"s"],[t.vol,c.sets*c.reps+" "+t.totalReps]].map(([l,v,cl])=>
+React.createElement("div",{className:"dcr",key:l},React.createElement("span",{className:"dcl"},l),React.createElement("span",{className:"dcv",style:{color:cl||"inherit"}},v)))),
+ex.tgt>0&&React.createElement("div",{style:{background:"#fff7ed",borderRadius:"var(--r)",padding:10,margin:"8px 0",fontSize:11,color:"var(--orn)"}},"🔒 "+t.progNote),
+// SWAP button
+React.createElement("button",{className:"btn btn-s",onClick:()=>setModal({type:"swap",gi:modal.gi,ei:modal.ei,muscle:g.muscle})},"🔄 "+t.swap),
+// REMOVE button (only non-target)
+!ex.tgt?React.createElement("button",{className:"btn btn-d",onClick:()=>removeExercise(modal.gi,modal.ei)},t.remove)
+:React.createElement("p",{style:{textAlign:"center",fontSize:10,color:"var(--dm)",marginTop:8}},t.cantRemove),
+React.createElement("button",{className:"btn btn-p",onClick:()=>setModal(null)},t.close)))})(),
+
+// SWAP MODAL
+modal?.type==="swap"&&(()=>{const g=day[modal.gi];const curEid=g?.exercises[modal.ei]?.eid;
+const usedEids=g.exercises.map(e=>e.eid);
+const avail=Object.entries(exDb).filter(([id,e])=>e.m===modal.muscle&&id!==curEid);
+return React.createElement("div",{className:"ov",onClick:()=>setModal(null)},React.createElement("div",{className:"mod",onClick:e=>e.stopPropagation()},
+React.createElement("div",{className:"mbar"}),React.createElement("h3",null,t.swapWith),
+React.createElement("div",{className:"msub"},tM(modal.muscle)),
+["F","C","I"].map(cat=>{const exs=avail.filter(([,e])=>e.c===cat);if(!exs.length)return null;
+return React.createElement("div",{key:cat},React.createElement("div",{className:"mgl"},t.cats[cat]),
+exs.map(([id,ex])=>React.createElement("div",{className:"mi",key:id,onClick:()=>swapExercise(modal.gi,modal.ei,id)},
+React.createElement("span",{className:"min"},ex.n),ex.rm>0&&React.createElement("span",{className:"mir"},ex.rm+"kg"))))}),
+React.createElement("button",{className:"btn btn-s",onClick:()=>setModal({type:"detail",gi:modal.gi,ei:modal.ei})},"← "+t.close)))})(),
+
+// ADD EXERCISE MODAL
+modal?.type==="add"&&(()=>{const g=day[modal.gi];const usedEids=g.exercises.map(e=>e.eid);
+const avail=Object.entries(exDb).filter(([id,e])=>e.m===modal.muscle&&!usedEids.includes(id));
+return React.createElement("div",{className:"ov",onClick:()=>setModal(null)},React.createElement("div",{className:"mod",onClick:e=>e.stopPropagation()},
+React.createElement("div",{className:"mbar"}),React.createElement("h3",null,t.addExTitle),
+React.createElement("div",{className:"msub"},tM(modal.muscle)),
+avail.length===0&&React.createElement("p",{style:{color:"var(--dm)",fontSize:13,padding:20,textAlign:"center"}},lang==="it"?"Nessun esercizio disponibile":"No exercises available"),
+["F","C","I"].map(cat=>{const exs=avail.filter(([,e])=>e.c===cat);if(!exs.length)return null;
+return React.createElement("div",{key:cat},React.createElement("div",{className:"mgl"},t.cats[cat]),
+exs.map(([id,ex])=>React.createElement("div",{className:"mi",key:id,onClick:()=>addExercise(modal.gi,id)},
+React.createElement("span",{className:"min"},ex.n),ex.rm>0&&React.createElement("span",{className:"mir"},ex.rm+"kg"))))}),
+React.createElement("button",{className:"btn btn-s",onClick:()=>setModal(null)},t.close)))})(),
+
+toast&&React.createElement("div",{className:"toast"},toast),
+// BOTTOM NAV
+React.createElement("div",{className:"bnav"},
+[["w","📋","workout"],["log","📅","log"],["v","📊","volume"],["l","🗂","library"],["r","🧮","rm"]].map(([k,i,tk])=>
+React.createElement("button",{key:k,className:"nb"+(view===k?" on":""),onClick:()=>setView(k)},
+React.createElement("span",{className:"ni"},i),t.tabs[tk]||tk))));}
+
+function RMCalc({exDb,setExDb,flash,t}){
+const[w,sW]=useState("");const[r,sR]=useState("");const[res,sRes]=useState(null);const[sel,sSel]=useState("");
+const calc=()=>{const wt=parseFloat(w),rp=parseInt(r);if(!wt||!rp||rp<1)return;sRes(rp===1?wt:Math.round(wt/(1.0278-0.0278*rp)))};
+return React.createElement("div",{style:{padding:16}},
+React.createElement("h3",{style:{marginBottom:2}},t.calc1rm),
+React.createElement("p",{style:{fontSize:11,color:"var(--dm)",marginBottom:12}},t.formula),
+React.createElement("div",{style:{background:"var(--sf)",border:"1px solid var(--bd)",borderRadius:"var(--r)",padding:14}},
+React.createElement("div",{className:"drow"},
+React.createElement("div",null,React.createElement("div",{className:"dlbl"},t.load+" (kg)"),React.createElement("input",{className:"dinp",type:"number",inputMode:"decimal",value:w,onChange:e=>sW(e.target.value)})),
+React.createElement("div",null,React.createElement("div",{className:"dlbl"},t.reps),React.createElement("input",{className:"dinp",type:"number",inputMode:"numeric",value:r,onChange:e=>sR(e.target.value)}))),
+React.createElement("button",{className:"btn btn-p",onClick:calc},t.calcBtn),
+res&&React.createElement(React.Fragment,null,
+React.createElement("div",{style:{fontFamily:"var(--m)",fontSize:28,fontWeight:700,color:"var(--grn)",textAlign:"center",padding:"12px 0"}},res+" kg"),
+React.createElement("div",{style:{display:"flex",gap:5,alignItems:"end",marginBottom:6}},
+React.createElement("div",{style:{flex:1}},React.createElement("div",{className:"dlbl"},t.saveOn),
+React.createElement("select",{className:"dinp",value:sel,onChange:e=>sSel(e.target.value),style:{fontSize:12}},
+React.createElement("option",{value:""},"--"),Object.entries(exDb).map(([id,ex])=>React.createElement("option",{key:id,value:id},ex.n)))),
+React.createElement("button",{style:{padding:"8px 14px",border:"none",borderRadius:8,background:"var(--tx)",color:"#fff",fontWeight:700,cursor:"pointer",height:40},onClick:()=>{if(!sel)return;setExDb(d=>({...d,[sel]:{...d[sel],rm:res}}));flash("1RM → "+res+"kg!")}},t.save)),
+React.createElement("div",{style:{display:"grid",gridTemplateColumns:"repeat(5,1fr)",gap:3,marginTop:10}},
+[100,95,90,85,80,75,70,65,60,50].map(p=>React.createElement("div",{key:p,style:{background:"var(--sf2)",borderRadius:5,padding:4,textAlign:"center"}},
+React.createElement("div",{style:{fontSize:8,color:"var(--dm)"}},p+"%"),
+React.createElement("div",{style:{fontFamily:"var(--m)",fontSize:11,fontWeight:600}},Math.round(res*p/100*4)/4)))))));}
+
 ReactDOM.createRoot(document.getElementById("app")).render(React.createElement(App));
 </script>
 </body>
