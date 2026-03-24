@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#ffffff">
+<title>V-Trainer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{--bg:#f5f5f7;--sf:#fff;--sf2:#f0f0f2;--bd:#e2e2e6;--tx:#1a1a1a;--dm:#8a8a8e;--red:#e8364e;--acc:#1a1a1a;--grn:#34c759;--orn:#ff9500;--r:14px;--f:'DM Sans',system-ui,sans-serif;--m:'JetBrains Mono',monospace}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--tx);font-family:var(--f);-webkit-font-smoothing:antialiased;font-size:15px}
+#app{max-width:480px;margin:0 auto;height:100%;display:flex;flex-direction:column;background:var(--bg);position:relative}
+
+/* HEADER */
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--sf);border-bottom:1px solid var(--bd);flex-shrink:0;z-index:10}
+.hdr h1{font-size:19px;font-weight:700;letter-spacing:-.4px}
+.hdr h1 b{color:var(--red);font-weight:700}
+.badge{font-size:11px;color:var(--dm);background:var(--sf2);padding:4px 12px;border-radius:16px;font-weight:600}
+
+/* PHASE + WEEK */
+.ctrl{flex-shrink:0;background:var(--sf);border-bottom:1px solid var(--bd)}
+.phases{display:flex;gap:6px;padding:10px 16px;overflow-x:auto}
+.phases::-webkit-scrollbar{display:none}
+.ph{padding:6px 14px;border-radius:20px;border:1.5px solid var(--bd);background:var(--sf);font-family:var(--f);font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;color:var(--dm);transition:all .15s;outline:none}
+.ph.on{border-color:var(--acc);color:var(--acc);background:var(--sf2);font-weight:700}
+.wbar{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;background:var(--sf2)}
+.wb{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--bd);background:var(--sf);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--tx);outline:none}
+.wb:active{background:var(--sf2)}
+.wc{text-align:center}
+.wl{font-family:var(--m);font-size:12px;font-weight:600;margin-bottom:3px}
+.dots{display:flex;gap:4px;justify-content:center}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--bd);transition:background .2s}
+.dot.on{background:var(--acc)}
+
+/* DAY TABS */
+.dtabs{display:flex;border-bottom:1px solid var(--bd);background:var(--sf);overflow-x:auto;flex-shrink:0}
+.dtabs::-webkit-scrollbar{display:none}
+.dt{flex:none;padding:12px 16px;border:none;background:transparent;font-family:var(--f);font-size:13px;font-weight:500;color:var(--dm);cursor:pointer;border-bottom:2.5px solid transparent;white-space:nowrap}
+.dt.on{color:var(--acc);border-bottom-color:var(--red);font-weight:700}
+
+/* SCROLLABLE CONTENT */
+.content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:16px}
+
+/* SECTIONS */
+.sec{padding:0 16px}
+.sh{display:flex;align-items:center;justify-content:space-between;padding:20px 0 8px}
+.stitle{font-size:17px;font-weight:700}
+.sedit{font-size:12px;color:var(--dm);cursor:pointer;padding:4px 8px;border-radius:6px}
+.sedit:active{background:var(--sf2)}
+
+/* EXERCISE ROW */
+.exr{display:flex;align-items:center;padding:14px 0;border-bottom:1px solid var(--bd);cursor:pointer;-webkit-user-select:none;user-select:none}
+.exr:last-child{border-bottom:none}
+.exr:active{background:var(--sf2);margin:0 -16px;padding:14px 16px;border-radius:8px}
+.eck{width:22px;height:22px;border-radius:50%;border:2px solid var(--bd);margin-right:14px;flex-shrink:0;transition:all .2s}
+.eck.done{background:var(--grn);border-color:var(--grn)}
+.eck.done::after{content:'✓';color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;height:100%}
+.exi{flex:1;min-width:0}
+.exn{font-size:15px;font-weight:600;line-height:1.3}
+.exc{display:inline;font-size:10px;color:var(--dm);background:var(--sf2);padding:1px 6px;border-radius:3px;margin-left:6px;vertical-align:middle;font-weight:500}
+.exm{font-size:13px;color:var(--dm);font-family:var(--m);margin-top:2px}
+.tgt{color:var(--red);font-weight:700;font-size:12px}
+.arrow{color:#c7c7cc;font-size:20px;margin-left:8px;font-weight:300}
+
+/* ADD BTN */
+.addb{width:100%;padding:13px;border-radius:var(--r);border:2px dashed var(--bd);background:transparent;font-family:var(--f);font-size:13px;font-weight:600;color:var(--dm);cursor:pointer;margin:10px 0 4px;transition:all .15s}
+.addb:active{border-color:var(--acc);color:var(--acc);background:var(--sf2)}
+
+/* BOTTOM NAV */
+.bnav{display:flex;background:var(--sf);border-top:1px solid var(--bd);flex-shrink:0;padding-bottom:env(safe-area-inset-bottom,0)}
+.nb{flex:1;padding:8px 4px 6px;border:none;background:transparent;font-family:var(--f);font-size:10px;color:var(--dm);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;outline:none}
+.nb.on{color:var(--red);font-weight:700}
+.ni{font-size:20px}
+
+/* MODAL */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:100;display:flex;align-items:flex-end;justify-content:center;animation:fadeIn .15s}
+@keyframes fadeIn{from{opacity:0}}
+.modal{background:var(--sf);border-radius:16px 16px 0 0;width:100%;max-width:480px;max-height:85vh;overflow-y:auto;padding:8px 16px 32px;padding-bottom:calc(32px + env(safe-area-inset-bottom,0));animation:slideUp .25s ease}
+@keyframes slideUp{from{transform:translateY(40%);opacity:.8}}
+.mbar{width:36px;height:4px;background:var(--bd);border-radius:2px;margin:8px auto 16px}
+.modal h3{font-size:18px;font-weight:700;margin-bottom:3px}
+.msub{font-size:12px;color:var(--dm);margin-bottom:16px}
+.mgroup{margin-bottom:10px}
+.mgl{font-size:11px;font-weight:700;color:var(--dm);text-transform:uppercase;letter-spacing:.8px;padding:6px 0 2px}
+.mitem{display:flex;align-items:center;padding:12px 8px;cursor:pointer;border-radius:10px;transition:background .1s}
+.mitem:active{background:var(--sf2)}
+.mname{flex:1;font-size:14px;font-weight:500}
+.mrm{font-family:var(--m);font-size:11px;color:var(--dm);background:var(--sf2);padding:2px 8px;border-radius:6px}
+
+/* DETAIL */
+.drow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px}
+.dfield{margin-bottom:12px}
+.dlbl{font-size:11px;font-weight:700;color:var(--dm);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.dinp{width:100%;padding:12px;border:1.5px solid var(--bd);border-radius:10px;font-family:var(--m);font-size:16px;background:var(--sf);color:var(--tx);outline:none;-webkit-appearance:none}
+.dinp:focus{border-color:var(--acc)}
+.dcomp{background:var(--sf2);border-radius:var(--r);padding:14px;margin:16px 0 8px}
+.dcrow{display:flex;justify-content:space-between;padding:4px 0}
+.dclbl{font-size:13px;color:var(--dm)}
+.dcval{font-family:var(--m);font-size:14px;font-weight:600}
+.grn{color:var(--grn)}.orn{color:var(--orn)}
+.mbtn{width:100%;padding:14px;border:none;border-radius:var(--r);font-family:var(--f);font-size:15px;font-weight:700;cursor:pointer;margin-top:8px;transition:all .1s}
+.mbtn:active{transform:scale(.98)}
+.msave{background:var(--acc);color:#fff}
+.mdel{background:transparent;color:var(--red);border:1.5px solid var(--red)}
+.mswap{background:var(--sf2);color:var(--tx);border:1.5px solid var(--bd)}
+.mnote{text-align:center;font-size:11px;color:var(--dm);margin-top:10px;line-height:1.4}
+
+/* VOLUME */
+.vsec{padding:16px}
+.vcard{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:14px;margin-bottom:8px}
+.vhd{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.vmuscle{font-size:15px;font-weight:700}
+.vstats{display:flex;gap:20px}
+.vsn{font-family:var(--m);font-size:18px;font-weight:700}
+.vsl{font-size:10px;color:var(--dm)}
+.vbar{height:5px;background:var(--sf2);border-radius:3px;overflow:hidden;margin-top:8px}
+.vfill{height:100%;border-radius:3px;transition:width .4s}
+
+/* LIBRARY */
+.lsec{padding:16px}
+.lrow{display:flex;align-items:center;gap:6px;padding:10px 0;border-bottom:1px solid var(--sf2)}
+.lname{flex:1;font-size:13px;font-weight:500}
+.lcat{font-size:9px;padding:2px 6px;border-radius:4px;font-weight:700}
+.lrmi{width:52px;padding:5px;border:1px solid var(--bd);border-radius:6px;font-family:var(--m);font-size:12px;text-align:center;background:var(--sf);color:var(--tx)}
+.ldel{background:none;border:none;font-size:16px;cursor:pointer;color:var(--dm);padding:4px 2px}
+.ldel:active{color:var(--red)}
+.nform{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:14px;margin-bottom:16px}
+.nrow{display:flex;gap:6px;align-items:end;flex-wrap:wrap}
+.nf{display:flex;flex-direction:column;gap:3px;flex:1;min-width:70px}
+.nf label{font-size:10px;color:var(--dm);font-weight:700}
+.nf input,.nf select{padding:8px;border:1px solid var(--bd);border-radius:6px;font-family:var(--f);font-size:12px;background:var(--sf);color:var(--tx)}
+.nbtn{padding:8px 14px;border:none;border-radius:8px;background:var(--acc);color:#fff;font-family:var(--f);font-weight:700;cursor:pointer;height:36px;font-size:14px}
+
+/* 1RM */
+.rsec{padding:16px}
+.rcard{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:16px}
+.rresult{font-family:var(--m);font-size:32px;font-weight:700;color:var(--grn);text-align:center;padding:14px 0}
+.pgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:14px}
+.pcell{background:var(--sf2);border-radius:6px;padding:6px;text-align:center}
+.ppct{font-size:9px;color:var(--dm)}.pkg{font-family:var(--m);font-size:12px;font-weight:600}
+
+/* TOAST */
+.toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:var(--acc);color:#fff;padding:10px 24px;border-radius:20px;font-size:13px;font-weight:600;z-index:200;animation:tpop .25s ease;white-space:nowrap}
+@keyframes tpop{from{opacity:0;transform:translateX(-50%) translateY(8px)}}
+
+/* EMPTY */
+.empty{text-align:center;padding:40px 20px;color:var(--dm)}
+.empty p{margin-top:8px;font-size:14px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.24.7/babel.min.js"></script>
+<script type="text/babel">
+const{useState,useEffect,useMemo,useCallback}=React;
+
+const CATS={F:"Fondamentale",C:"Complementare",I:"Isolamento"};
+const MUSCLES=["Petto","Dorso","Gambe","Spalle","Bicipiti","Tricipiti","Addominali"];
+const MC=m=>({Petto:"#ef4444",Dorso:"#3b82f6",Gambe:"#22c55e",Spalle:"#f59e0b",Bicipiti:"#a855f7",Tricipiti:"#ec4899",Addominali:"#06b6d4"}[m]||"#888");
+const CC=c=>c==="F"?{bg:"#fef2f2",c:"#dc2626"}:c==="C"?{bg:"#eff6ff",c:"#2563eb"}:{bg:"#f0fdf4",c:"#16a34a"};
+
+const EDB=[
+  {id:"e1",name:"Panca piana",muscle:"Petto",cat:"F",rm:74},
+  {id:"e2",name:"Chest Press",muscle:"Petto",cat:"C",rm:65},
+  {id:"e3",name:"Chest Press Incline",muscle:"Petto",cat:"C",rm:53},
+  {id:"e4",name:"Spinte manubri panca piana",muscle:"Petto",cat:"C",rm:25},
+  {id:"e5",name:"Spinte manubri panca 45°",muscle:"Petto",cat:"C",rm:24},
+  {id:"e6",name:"Croci su panca piana",muscle:"Petto",cat:"I",rm:12},
+  {id:"e7",name:"Croci ai cavi bassi",muscle:"Petto",cat:"I",rm:6},
+  {id:"e8",name:"Stacco da terra",muscle:"Dorso",cat:"F",rm:100},
+  {id:"e9",name:"Lat machine presa larga",muscle:"Dorso",cat:"C",rm:60},
+  {id:"e10",name:"Lat machine presa media",muscle:"Dorso",cat:"C",rm:69},
+  {id:"e11",name:"Lat machine triangolo",muscle:"Dorso",cat:"C",rm:69},
+  {id:"e12",name:"Pulley machine triangolo",muscle:"Dorso",cat:"C",rm:60},
+  {id:"e13",name:"Rematore manubrio",muscle:"Dorso",cat:"C",rm:32},
+  {id:"e14",name:"Rematore T-bar triangolo",muscle:"Dorso",cat:"C",rm:56},
+  {id:"e15",name:"Squat",muscle:"Gambe",cat:"F",rm:103},
+  {id:"e16",name:"Leg press",muscle:"Gambe",cat:"F",rm:151},
+  {id:"e17",name:"Stacco rumeno",muscle:"Gambe",cat:"F",rm:99},
+  {id:"e18",name:"Leg curl machine",muscle:"Gambe",cat:"C",rm:60},
+  {id:"e19",name:"Leg extension",muscle:"Gambe",cat:"C",rm:60},
+  {id:"e20",name:"Affondi indietro multipower",muscle:"Gambe",cat:"C",rm:27},
+  {id:"e21",name:"Affondi manubri in camminata",muscle:"Gambe",cat:"C",rm:25},
+  {id:"e22",name:"Military Press",muscle:"Spalle",cat:"F",rm:50},
+  {id:"e23",name:"Military press multipower",muscle:"Spalle",cat:"C",rm:53},
+  {id:"e24",name:"Spinte in alto manubri",muscle:"Spalle",cat:"C",rm:24},
+  {id:"e25",name:"Alzate laterali in piedi",muscle:"Spalle",cat:"I",rm:12},
+  {id:"e26",name:"Alzate laterali su panca 30°",muscle:"Spalle",cat:"I",rm:9},
+  {id:"e27",name:"Alzate laterali cavo basso",muscle:"Spalle",cat:"I",rm:6},
+  {id:"e28",name:"Alzate posteriori su panca",muscle:"Spalle",cat:"I",rm:9},
+  {id:"e29",name:"Curl bilanciere EZ",muscle:"Bicipiti",cat:"C",rm:25},
+  {id:"e30",name:"Curl manubri",muscle:"Bicipiti",cat:"C",rm:13},
+  {id:"e31",name:"Curl panca 60°",muscle:"Bicipiti",cat:"I",rm:11},
+  {id:"e32",name:"Curl cavo basso con barra",muscle:"Bicipiti",cat:"I",rm:20},
+  {id:"e33",name:"Hammer curl 60°",muscle:"Bicipiti",cat:"I",rm:12},
+  {id:"e34",name:"French press bilanciere EZ",muscle:"Tricipiti",cat:"C",rm:25},
+  {id:"e35",name:"French press ez su panca piana",muscle:"Tricipiti",cat:"C",rm:20},
+  {id:"e36",name:"French press corda al cavo alto",muscle:"Tricipiti",cat:"I",rm:32},
+  {id:"e37",name:"French press cavo basso",muscle:"Tricipiti",cat:"C",rm:24},
+  {id:"e38",name:"Kickback cavo basso",muscle:"Tricipiti",cat:"I",rm:7},
+  {id:"e39",name:"Bicycle Crunch",muscle:"Addominali",cat:"I",rm:0},
+  {id:"e40",name:"Crunch cavo alto",muscle:"Addominali",cat:"I",rm:106},
+  {id:"e41",name:"Leg Raise",muscle:"Addominali",cat:"I",rm:0},
+  {id:"e42",name:"Sit Up",muscle:"Addominali",cat:"I",rm:0}
+];
+
+const DDAYS=[
+  {id:"d1",name:"Giorno 1",sections:[
+    {muscle:"Petto",exercises:[{eid:"e1",sets:4,reps:5,pct:85,rest:180,target:true},{eid:"e4",sets:3,reps:8,pct:72,rest:90,target:false},{eid:"e6",sets:3,reps:10,pct:60,rest:90,target:false}]},
+    {muscle:"Spalle",exercises:[{eid:"e24",sets:3,reps:8,pct:75,rest:120,target:true},{eid:"e25",sets:3,reps:10,pct:70,rest:90,target:false}]},
+    {muscle:"Gambe",exercises:[{eid:"e16",sets:3,reps:10,pct:75,rest:150,target:true},{eid:"e19",sets:3,reps:10,pct:70,rest:90,target:false}]},
+    {muscle:"Tricipiti",exercises:[{eid:"e35",sets:4,reps:10,pct:72,rest:90,target:false},{eid:"e36",sets:3,reps:12,pct:65,rest:60,target:false}]}
+  ]},
+  {id:"d2",name:"Giorno 2",sections:[
+    {muscle:"Dorso",exercises:[{eid:"e8",sets:3,reps:5,pct:85,rest:180,target:true},{eid:"e14",sets:4,reps:7,pct:78,rest:120,target:true},{eid:"e9",sets:3,reps:8,pct:75,rest:120,target:false},{eid:"e12",sets:3,reps:10,pct:72,rest:90,target:false}]},
+    {muscle:"Gambe",exercises:[{eid:"e15",sets:3,reps:5,pct:85,rest:180,target:true},{eid:"e17",sets:3,reps:8,pct:78,rest:120,target:false}]},
+    {muscle:"Bicipiti",exercises:[{eid:"e30",sets:4,reps:8,pct:70,rest:90,target:false},{eid:"e31",sets:3,reps:10,pct:75,rest:60,target:false}]},
+    {muscle:"Addominali",exercises:[{eid:"e40",sets:3,reps:15,pct:60,rest:60,target:false},{eid:"e41",sets:3,reps:15,pct:0,rest:60,target:false}]}
+  ]},
+  {id:"d3",name:"Giorno 3",sections:[
+    {muscle:"Petto",exercises:[{eid:"e2",sets:4,reps:8,pct:80,rest:120,target:true},{eid:"e5",sets:3,reps:10,pct:72,rest:90,target:false},{eid:"e7",sets:3,reps:12,pct:65,rest:60,target:false}]},
+    {muscle:"Dorso",exercises:[{eid:"e10",sets:4,reps:8,pct:80,rest:120,target:true},{eid:"e13",sets:3,reps:10,pct:72,rest:90,target:false}]},
+    {muscle:"Spalle",exercises:[{eid:"e22",sets:3,reps:8,pct:78,rest:120,target:true},{eid:"e25",sets:3,reps:12,pct:65,rest:60,target:false}]},
+    {muscle:"Bicipiti",exercises:[{eid:"e29",sets:3,reps:8,pct:72,rest:90,target:false}]},
+    {muscle:"Tricipiti",exercises:[{eid:"e37",sets:3,reps:10,pct:72,rest:90,target:false},{eid:"e38",sets:3,reps:12,pct:65,rest:60,target:false}]}
+  ]},
+  {id:"d4",name:"Giorno 4",sections:[
+    {muscle:"Gambe",exercises:[{eid:"e16",sets:4,reps:8,pct:78,rest:150,target:true},{eid:"e18",sets:3,reps:10,pct:72,rest:90,target:false},{eid:"e20",sets:3,reps:10,pct:70,rest:90,target:false}]},
+    {muscle:"Spalle",exercises:[{eid:"e28",sets:3,reps:12,pct:65,rest:60,target:false}]},
+    {muscle:"Addominali",exercises:[{eid:"e39",sets:3,reps:20,pct:0,rest:45,target:false},{eid:"e42",sets:3,reps:15,pct:0,rest:45,target:false}]}
+  ]}
+];
+
+const PH=[{id:"hyp",name:"Ipertrofia",weeks:6,icon:"💪"},{id:"str",name:"Forza",weeks:6,icon:"🏋️"},{id:"pow",name:"Potenza",weeks:4,icon:"⚡"},{id:"del",name:"Deload",weeks:1,icon:"🧘"}];
+const uid=()=>"x"+Math.random().toString(36).slice(2,9);
+const wa=(b,w,tw,pid)=>{if(pid==="del")return{sets:Math.max(2,b.sets-1),reps:b.reps,pct:Math.max(50,b.pct-20)};return{sets:b.sets+(w>=4?1:0),reps:w>=tw-1?Math.max(1,b.reps-1):b.reps,pct:Math.min(97,b.pct+w*2.5)}};
+const cld=(rm,p)=>rm>0?Math.round(rm*p/100*4)/4:0;
+
+const SK="vt-v8";
+const ld=()=>{try{const d=localStorage.getItem(SK);return d?JSON.parse(d):null}catch{return null}};
+const sv=d=>{try{localStorage.setItem(SK,JSON.stringify(d))}catch{}};
+const init=()=>{const s=ld();if(s?.v===8)return s;return{v:8,exercises:EDB.map(e=>({...e})),days:JSON.parse(JSON.stringify(DDAYS)),phase:"hyp",week:0,done:{}}};
+
+function App(){
+  const[st,setSt]=useState(init);
+  const[view,setView]=useState("workout");
+  const[sd,setSd]=useState(0);
+  const[modal,setModal]=useState(null);
+  const[toast,setToast]=useState("");
+  useEffect(()=>{sv(st)},[st]);
+  const flash=m=>{setToast(m);setTimeout(()=>setToast(""),1800)};
+  const upd=useCallback(fn=>setSt(s=>{const n=JSON.parse(JSON.stringify(s));fn(n);return n}),[]);
+  const ph=PH.find(p=>p.id===st.phase);
+  const day=st.days[sd];
+  const fe=eid=>st.exercises.find(e=>e.id===eid);
+  const gw=b=>wa(b,st.week,ph.weeks,st.phase);
+
+  const toggleDone=(si,ei)=>{
+    const key=`${sd}-${si}-${ei}-${st.week}`;
+    upd(s=>{if(!s.done)s.done={};s.done[key]=!s.done[key]});
+  };
+  const isDone=(si,ei)=>st.done?.[`${sd}-${si}-${ei}-${st.week}`]||false;
+
+  const wv=useMemo(()=>{
+    const v={};MUSCLES.forEach(m=>v[m]={sets:0,reps:0});
+    st.days.forEach(d=>d.sections.forEach(sec=>sec.exercises.forEach(ex=>{const w=gw(ex);v[sec.muscle].sets+=w.sets;v[sec.muscle].reps+=w.sets*w.reps})));
+    return v;
+  },[st]);
+
+  return(
+    <>
+      <div className="hdr"><h1>V<b>-Trainer</b></h1><span className="badge">GB</span></div>
+      <div className="ctrl">
+        <div className="phases">{PH.map(p=><button key={p.id} className={`ph ${st.phase===p.id?"on":""}`} onClick={()=>upd(s=>{s.phase=p.id;s.week=0})}>{p.icon} {p.name}</button>)}</div>
+        <div className="wbar">
+          <button className="wb" onClick={()=>upd(s=>{s.week=Math.max(0,s.week-1)})}>‹</button>
+          <div className="wc"><div className="wl">Settimana {st.week+1} / {ph.weeks}</div><div className="dots">{Array.from({length:ph.weeks},(_,i)=><div key={i} className={`dot ${i<=st.week?"on":""}`}/>)}</div></div>
+          <button className="wb" onClick={()=>upd(s=>{s.week=Math.min(ph.weeks-1,s.week+1)})}>›</button>
+        </div>
+      </div>
+
+      {view==="workout"&&<div className="dtabs">{st.days.map((d,i)=><button key={d.id} className={`dt ${sd===i?"on":""}`} onClick={()=>setSd(i)}>{d.name}</button>)}</div>}
+
+      <div className="content">
+        {view==="workout"&&day.sections.map((sec,si)=>(
+          <div className="sec" key={si}>
+            <div className="sh">
+              <div className="stitle" style={{color:MC(sec.muscle)}}>{sec.muscle}</div>
+              <div className="sedit" onClick={()=>setModal({t:"add",si})}>Modifica ✏️</div>
+            </div>
+            {sec.exercises.map((ex,ei)=>{
+              const d=fe(ex.eid);if(!d)return null;
+              const w=gw(ex);const l=cld(d.rm,w.pct);
+              const ms=l>0?`${w.sets}x${w.reps}@${l}kg`:`${w.sets}x${w.reps}`;
+              const done=isDone(si,ei);
+              return(
+                <div className="exr" key={ei}>
+                  <div className={`eck ${done?"done":""}`} onClick={(e)=>{e.stopPropagation();toggleDone(si,ei)}}/>
+                  <div className="exi" onClick={()=>setModal({t:"det",si,ei})}>
+                    <div className="exn">{d.name}<span className="exc">{CATS[d.cat]}</span></div>
+                    <div className="exm">{ex.target&&<span className="tgt">Target </span>}{ms}</div>
+                  </div>
+                  <span className="arrow" onClick={()=>setModal({t:"det",si,ei})}>›</span>
+                </div>
+              );
+            })}
+            <button className="addb" onClick={()=>setModal({t:"add",si})}>+ Aggiungi esercizio</button>
+          </div>
+        ))}
+
+        {view==="volume"&&<div className="vsec">
+          <h3 style={{marginBottom:3}}>Volume Settimanale</h3>
+          <p style={{fontSize:12,color:"var(--dm)",marginBottom:16}}>Settimana {st.week+1} · {ph.name}</p>
+          {MUSCLES.map(m=>{const v=wv[m];return(
+            <div className="vcard" key={m}>
+              <div className="vmuscle" style={{color:MC(m),marginBottom:4}}>{m}</div>
+              <div className="vstats">
+                <div><div className="vsn">{v.sets}</div><div className="vsl">Serie / sett</div></div>
+                <div><div className="vsn">{v.reps}</div><div className="vsl">Reps totali</div></div>
+              </div>
+              <div className="vbar"><div className="vfill" style={{width:`${Math.min(100,v.sets/25*100)}%`,background:MC(m)}}/></div>
+            </div>
+          )})}
+        </div>}
+
+        {view==="library"&&<div className="lsec">
+          <h3 style={{marginBottom:12}}>Libreria Esercizi</h3>
+          <div className="nform">
+            <div style={{fontWeight:700,marginBottom:8,fontSize:14}}>Nuovo esercizio</div>
+            <NewExForm onAdd={ex=>{upd(s=>{s.exercises.push({...ex,id:uid()})});flash("Aggiunto!")}}/>
+          </div>
+          {MUSCLES.map(m=>{const exs=st.exercises.filter(e=>e.muscle===m);if(!exs.length)return null;return(
+            <div key={m}>
+              <div style={{fontSize:12,fontWeight:700,color:MC(m),padding:"12px 0 4px",textTransform:"uppercase",letterSpacing:.5}}>{m}</div>
+              {exs.map(ex=>{const cc=CC(ex.cat);return(
+                <div className="lrow" key={ex.id}>
+                  <span className="lname">{ex.name}</span>
+                  <span className="lcat" style={{background:cc.bg,color:cc.c}}>{CATS[ex.cat]}</span>
+                  <input className="lrmi" type="number" value={ex.rm} onChange={e=>upd(s=>{const x=s.exercises.find(x=>x.id===ex.id);if(x)x.rm=parseFloat(e.target.value)||0})}/>
+                  <span style={{fontSize:10,color:"var(--dm)"}}>kg</span>
+                  <button className="ldel" onClick={()=>{if(confirm("Eliminare "+ex.name+"?")){upd(s=>{s.exercises=s.exercises.filter(x=>x.id!==ex.id);s.days.forEach(d=>d.sections.forEach(sec=>{sec.exercises=sec.exercises.filter(x=>x.eid!==ex.id)}))});flash("Eliminato")}}}>✕</button>
+                </div>
+              )})}
+            </div>
+          )})}
+        </div>}
+
+        {view==="rm"&&<RMCalc exercises={st.exercises} onUpdate={(id,v)=>upd(s=>{const x=s.exercises.find(x=>x.id===id);if(x)x.rm=v})} flash={flash}/>}
+      </div>
+
+      {/* MODALS */}
+      {modal?.t==="add"&&<div className="overlay" onClick={()=>setModal(null)}><div className="modal" onClick={e=>e.stopPropagation()}>
+        <div className="mbar"/><h3>Aggiungi esercizio</h3><div className="msub">{day.sections[modal.si]?.muscle}</div>
+        {["F","C","I"].map(cat=>{const mu=day.sections[modal.si]?.muscle;const exs=st.exercises.filter(e=>e.muscle===mu&&e.cat===cat);if(!exs.length)return null;return(
+          <div className="mgroup" key={cat}><div className="mgl">{CATS[cat]}</div>
+          {exs.map(ex=><div className="mitem" key={ex.id} onClick={()=>{upd(s=>{s.days[sd].sections[modal.si].exercises.push({eid:ex.id,sets:3,reps:10,pct:70,rest:90,target:false})});setModal(null);flash("Aggiunto!")}}>
+            <span className="mname">{ex.name}</span>{ex.rm>0&&<span className="mrm">{ex.rm}kg</span>}
+          </div>)}</div>
+        )})}
+        <button className="mbtn mswap" onClick={()=>setModal(null)}>Chiudi</button>
+      </div></div>}
+
+      {modal?.t==="det"&&(()=>{
+        const sec=day.sections[modal.si];const ex=sec?.exercises[modal.ei];if(!ex)return null;
+        const d=fe(ex.eid);if(!d)return null;const w=gw(ex);const l=cld(d.rm,w.pct);
+        return(<div className="overlay" onClick={()=>setModal(null)}><div className="modal" onClick={e=>e.stopPropagation()}>
+          <div className="mbar"/><h3>{d.name}</h3>
+          <div className="msub">{ex.target&&<span style={{color:"var(--red)",fontWeight:700}}>Target · </span>}{CATS[d.cat]} · 1RM: {d.rm}kg</div>
+          <div className="drow">
+            <div className="dfield"><div className="dlbl">Serie</div><input className="dinp" type="number" inputMode="numeric" value={ex.sets} onChange={e=>upd(s=>{s.days[sd].sections[modal.si].exercises[modal.ei].sets=parseInt(e.target.value)||1})}/></div>
+            <div className="dfield"><div className="dlbl">Reps</div><input className="dinp" type="number" inputMode="numeric" value={ex.reps} onChange={e=>upd(s=>{s.days[sd].sections[modal.si].exercises[modal.ei].reps=parseInt(e.target.value)||1})}/></div>
+          </div>
+          <div className="drow">
+            <div className="dfield"><div className="dlbl">% 1RM</div><input className="dinp" type="number" inputMode="numeric" value={ex.pct} onChange={e=>upd(s=>{s.days[sd].sections[modal.si].exercises[modal.ei].pct=parseInt(e.target.value)||50})}/></div>
+            <div className="dfield"><div className="dlbl">Recupero (s)</div><input className="dinp" type="number" inputMode="numeric" value={ex.rest} onChange={e=>upd(s=>{s.days[sd].sections[modal.si].exercises[modal.ei].rest=parseInt(e.target.value)||60})}/></div>
+          </div>
+          <div className="dcomp">
+            <div style={{fontWeight:700,marginBottom:8,fontSize:13}}>📈 Settimana {st.week+1}</div>
+            <div className="dcrow"><span className="dclbl">Serie</span><span className="dcval">{w.sets}</span></div>
+            <div className="dcrow"><span className="dclbl">Reps</span><span className="dcval">{w.reps}</span></div>
+            <div className="dcrow"><span className="dclbl">% 1RM</span><span className="dcval orn">{Math.round(w.pct)}%</span></div>
+            <div className="dcrow"><span className="dclbl">Carico</span><span className="dcval grn">{l>0?l+" kg":"Corpo libero"}</span></div>
+            <div className="dcrow"><span className="dclbl">Volume totale</span><span className="dcval">{w.sets*w.reps} reps</span></div>
+          </div>
+          <button className="mbtn mswap" onClick={()=>setModal({t:"swap",si:modal.si,ei:modal.ei})}>🔄 Sostituisci esercizio</button>
+          {!ex.target?<button className="mbtn mdel" onClick={()=>{upd(s=>{s.days[sd].sections[modal.si].exercises.splice(modal.ei,1)});setModal(null);flash("Rimosso")}}>Rimuovi dalla scheda</button>
+          :<p className="mnote">🔒 Esercizio Target — non rimuovibile, ma puoi sostituirlo</p>}
+          <button className="mbtn msave" onClick={()=>setModal(null)}>Chiudi</button>
+        </div></div>);
+      })()}
+
+      {modal?.t==="swap"&&(()=>{
+        const sec=day.sections[modal.si];const cur=sec?.exercises[modal.ei];
+        return(<div className="overlay" onClick={()=>setModal(null)}><div className="modal" onClick={e=>e.stopPropagation()}>
+          <div className="mbar"/><h3>Sostituisci con...</h3><div className="msub">{sec.muscle}</div>
+          {["F","C","I"].map(cat=>{const exs=st.exercises.filter(e=>e.muscle===sec.muscle&&e.cat===cat&&e.id!==cur.eid);if(!exs.length)return null;return(
+            <div className="mgroup" key={cat}><div className="mgl">{CATS[cat]}</div>
+            {exs.map(ex=><div className="mitem" key={ex.id} onClick={()=>{upd(s=>{s.days[sd].sections[modal.si].exercises[modal.ei].eid=ex.id});setModal(null);flash("Sostituito!")}}>
+              <span className="mname">{ex.name}</span>{ex.rm>0&&<span className="mrm">{ex.rm}kg</span>}
+            </div>)}</div>
+          )})}
+          <button className="mbtn mswap" onClick={()=>setModal({t:"det",si:modal.si,ei:modal.ei})}>← Indietro</button>
+        </div></div>);
+      })()}
+
+      {toast&&<div className="toast">{toast}</div>}
+
+      <div className="bnav">
+        {[["workout","📋","Scheda"],["volume","📊","Volume"],["library","🗂","Esercizi"],["rm","🧮","1RM"]].map(([k,i,l])=>
+          <button key={k} className={`nb ${view===k?"on":""}`} onClick={()=>setView(k)}><span className="ni">{i}</span>{l}</button>
+        )}
+      </div>
+    </>
+  );
+}
+
+function NewExForm({onAdd}){
+  const[n,sN]=useState("");const[m,sM]=useState("Petto");const[c,sC]=useState("C");const[r,sR]=useState("");
+  return(<div className="nrow">
+    <div className="nf"><label>Nome</label><input value={n} onChange={e=>sN(e.target.value)} placeholder="Nome esercizio"/></div>
+    <div className="nf" style={{maxWidth:95}}><label>Muscolo</label><select value={m} onChange={e=>sM(e.target.value)}>{MUSCLES.map(m=><option key={m}>{m}</option>)}</select></div>
+    <div className="nf" style={{maxWidth:85}}><label>Tipo</label><select value={c} onChange={e=>sC(e.target.value)}>{Object.entries(CATS).map(([k,v])=><option key={k} value={k}>{v}</option>)}</select></div>
+    <div className="nf" style={{maxWidth:55}}><label>1RM</label><input type="number" inputMode="numeric" value={r} onChange={e=>sR(e.target.value)}/></div>
+    <button className="nbtn" onClick={()=>{if(!n.trim())return;onAdd({name:n.trim(),muscle:m,cat:c,rm:parseFloat(r)||0});sN("");sR("")}}>+</button>
+  </div>);
+}
+
+function RMCalc({exercises,onUpdate,flash}){
+  const[w,sW]=useState("");const[r,sR]=useState("");const[res,sRes]=useState(null);const[sel,sSel]=useState("");
+  const calc=()=>{const wt=parseFloat(w),rp=parseInt(r);if(!wt||!rp||rp<1)return;sRes(rp===1?wt:Math.round(wt/(1.0278-0.0278*rp)))};
+  return(<div className="rsec"><h3 style={{marginBottom:3}}>Calcola 1RM</h3><p style={{fontSize:12,color:"var(--dm)",marginBottom:14}}>Formula di Brzycki</p>
+    <div className="rcard">
+      <div className="drow">
+        <div className="dfield"><div className="dlbl">Carico (kg)</div><input className="dinp" type="number" inputMode="decimal" value={w} onChange={e=>sW(e.target.value)}/></div>
+        <div className="dfield"><div className="dlbl">Ripetizioni</div><input className="dinp" type="number" inputMode="numeric" value={r} onChange={e=>sR(e.target.value)}/></div>
+      </div>
+      <button className="mbtn msave" onClick={calc}>Calcola</button>
+      {res&&<><div className="rresult">{res} kg</div>
+        <div style={{display:"flex",gap:6,alignItems:"end",marginBottom:8}}>
+          <div className="dfield" style={{flex:1,marginBottom:0}}><div className="dlbl">Salva su esercizio</div>
+            <select className="dinp" value={sel} onChange={e=>sSel(e.target.value)} style={{fontSize:13}}>
+              <option value="">-- Seleziona --</option>{exercises.map(ex=><option key={ex.id} value={ex.id}>{ex.name}</option>)}
+            </select></div>
+          <button className="nbtn" onClick={()=>{if(!sel)return;onUpdate(sel,res);flash("1RM → "+res+"kg!")}}>Salva</button>
+        </div>
+        <div className="pgrid">{[100,95,90,85,80,75,70,65,60,50].map(p=><div className="pcell" key={p}><div className="ppct">{p}%</div><div className="pkg">{Math.round(res*p/100*4)/4}</div></div>)}</div>
+      </>}
+    </div>
+  </div>);
+}
+
+ReactDOM.createRoot(document.getElementById("app")).render(<App/>);
+</script>
+</body>
+</html>
